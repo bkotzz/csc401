@@ -1,0 +1,130 @@
+
+
+Partition 0:
+
+   a   b   <-- classified as
+ 331 219 |   a = 0
+ 226 324 |   b = 4
+
+Accuracy - 0.595455 %
+Precision - A: 0.594255 %
+            B: 0.596685 %
+Recall - A: 0.601818 %
+         B: 0.589091 %
+
+
+Partition 1:
+
+   a   b   <-- classified as
+ 310 240 |   a = 0
+ 227 323 |   b = 4
+
+Accuracy - 0.575455 %
+Precision - A: 0.577281 %
+            B: 0.573712 %
+Recall - A: 0.563636 %
+         B: 0.587273 %
+
+
+Partition 2:
+
+   a   b   <-- classified as
+ 327 223 |   a = 0
+ 249 301 |   b = 4
+
+Accuracy - 0.570909 %
+Precision - A: 0.567708 %
+            B: 0.574427 %
+Recall - A: 0.594545 %
+         B: 0.547273 %
+
+
+Partition 3:
+
+   a   b   <-- classified as
+ 340 210 |   a = 0
+ 214 336 |   b = 4
+
+Accuracy - 0.614545 %
+Precision - A: 0.613718 %
+            B: 0.615385 %
+Recall - A: 0.618182 %
+         B: 0.610909 %
+
+
+Partition 4:
+
+   a   b   <-- classified as
+ 336 214 |   a = 0
+ 239 311 |   b = 4
+
+Accuracy - 0.588182 %
+Precision - A: 0.584348 %
+            B: 0.592381 %
+Recall - A: 0.610909 %
+         B: 0.565455 %
+
+
+Partition 5:
+
+   a   b   <-- classified as
+ 319 231 |   a = 0
+ 250 300 |   b = 4
+
+Accuracy - 0.562727 %
+Precision - A: 0.560633 %
+            B: 0.564972 %
+Recall - A: 0.58 %
+         B: 0.545455 %
+
+
+Partition 6:
+
+   a   b   <-- classified as
+ 332 218 |   a = 0
+ 232 318 |   b = 4
+
+Accuracy - 0.590909 %
+Precision - A: 0.588652 %
+            B: 0.593284 %
+Recall - A: 0.603636 %
+         B: 0.578182 %
+
+
+Partition 7:
+
+   a   b   <-- classified as
+ 350 200 |   a = 0
+ 219 331 |   b = 4
+
+Accuracy - 0.619091 %
+Precision - A: 0.615114 %
+            B: 0.623352 %
+Recall - A: 0.636364 %
+         B: 0.601818 %
+
+
+Partition 8:
+
+   a   b   <-- classified as
+ 336 214 |   a = 0
+ 220 330 |   b = 4
+
+Accuracy - 0.605455 %
+Precision - A: 0.604317 %
+            B: 0.606618 %
+Recall - A: 0.610909 %
+         B: 0.6 %
+
+
+Partition 9:
+
+   a   b   <-- classified as
+ 337 213 |   a = 0
+ 232 318 |   b = 4
+
+Accuracy - 0.595455 %
+Precision - A: 0.592267 %
+            B: 0.59887 %
+Recall - A: 0.612727 %
+         B: 0.578182 %

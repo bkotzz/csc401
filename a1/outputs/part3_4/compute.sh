@@ -1,6 +1,7 @@
 #!/bin/bash
 
-output_file=3.4output.txt
+prefix=""
+output_file=${prefix}3.4output.txt
 
 start=0
 end=10
@@ -10,8 +11,8 @@ do
     echo "
 
 Partition $i:" >> $output_file
-    tail -n 5 $i.txt >> $output_file
-    output=`tail -n 3 $i.txt`
+    tail -n 5 $prefix$i.txt >> $output_file
+    output=`tail -n 3 $prefix$i.txt`
     output_arr=($output)
     aa=${output_arr[0]}
     ab=${output_arr[1]}
@@ -29,4 +30,5 @@ Partition $i:" >> $output_file
             B: $prec_b %" >> $output_file
     echo "Recall - A: $rec_a %
          B: $rec_b %" >> $output_file
+    echo $acc,
 done
