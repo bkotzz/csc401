@@ -1,0 +1,25 @@
+@relation sentiment
+
+@attribute first_person_pronouns numeric
+@attribute second_person_pronouns numeric
+@attribute third_person_pronouns numeric
+@attribute coordinating_conjunctions numeric
+@attribute past_tense_verbs numeric
+@attribute future_tense_verbs numeric
+@attribute commas numeric
+@attribute colons numeric
+@attribute dashes numeric
+@attribute parantheses numeric
+@attribute ellipses numeric
+@attribute common_nouns numeric
+@attribute proper_nouns numeric
+@attribute adverbs numeric
+@attribute wh_words numeric
+@attribute slang_acronyms numeric
+@attribute upper_case_words numeric
+@attribute sentence_length numeric
+@attribute token_length numeric
+@attribute number_sentences numeric
+@attribute class {0, 4}
+
+@data
