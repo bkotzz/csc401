@@ -1,0 +1,69 @@
+N = 500
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 21 class):
+	Information Gain Ranking Filter
+
+Ranked attributes:
+ 0.02849   19 token_length
+ 0.02291    2 second_person_pronouns
+ 0.00659    9 dashes
+ 0          6 future_tense_verbs
+ 0          8 colons
+ 0          7 commas
+ 0          3 third_person_pronouns
+ 0          1 first_person_pronouns
+ 0          5 past_tense_verbs
+ 0          4 coordinating_conjunctions
+ 0         16 slang_acronyms
+ 0         15 wh_words
+ 0         20 number_sentences
+ 0         17 upper_case_words
+ 0         18 sentence_length
+ 0         11 ellipses
+ 0         10 parantheses
+ 0         14 adverbs
+ 0         12 common_nouns
+ 0         13 proper_nouns
+
+Selected attributes: 19,2,9,6,8,7,3,1,5,4,16,15,20,17,18,11,10,14,12,13 : 20
+
+N = 5500
+
+
+=== Attribute Selection on all input data ===
+
+Search Method:
+	Attribute ranking.
+
+Attribute Evaluator (supervised, Class (nominal): 21 class):
+	Information Gain Ranking Filter
+
+Ranked attributes:
+ 0.02849   19 token_length
+ 0.02291    2 second_person_pronouns
+ 0.00659    9 dashes
+ 0          6 future_tense_verbs
+ 0          8 colons
+ 0          7 commas
+ 0          3 third_person_pronouns
+ 0          1 first_person_pronouns
+ 0          5 past_tense_verbs
+ 0          4 coordinating_conjunctions
+ 0         16 slang_acronyms
+ 0         15 wh_words
+ 0         20 number_sentences
+ 0         17 upper_case_words
+ 0         18 sentence_length
+ 0         11 ellipses
+ 0         10 parantheses
+ 0         14 adverbs
+ 0         12 common_nouns
+ 0         13 proper_nouns
+
+Selected attributes: 19,2,9,6,8,7,3,1,5,4,16,15,20,17,18,11,10,14,12,13 : 20
+

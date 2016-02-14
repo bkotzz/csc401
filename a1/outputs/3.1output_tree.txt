@@ -1,41 +1,41 @@
 
-Time taken to build model: 1.92 seconds
+Time taken to build model: 1.86 seconds
 Time taken to test model on training data: 0.13 seconds
 
 === Error on training data ===
 
-Correctly Classified Instances        9012               81.9273 %
-Incorrectly Classified Instances      1988               18.0727 %
-Kappa statistic                          0.6385
-Mean absolute error                      0.2656
-Root mean squared error                  0.3644
-Relative absolute error                 53.1157 %
-Root relative squared error             72.8805 %
+Correctly Classified Instances        9004               81.8545 %
+Incorrectly Classified Instances      1996               18.1455 %
+Kappa statistic                          0.6371
+Mean absolute error                      0.2668
+Root mean squared error                  0.3652
+Relative absolute error                 53.361  %
+Root relative squared error             73.0486 %
 Total Number of Instances            11000     
 
 
 === Confusion Matrix ===
 
     a    b   <-- classified as
- 4584  915 |    a = 0
- 1073 4428 |    b = 4
+ 4585  915 |    a = 0
+ 1081 4419 |    b = 4
 
 
 === Error on test data ===
 
-Correctly Classified Instances         198               55.1532 %
-Incorrectly Classified Instances       161               44.8468 %
-Kappa statistic                          0.1027
-Mean absolute error                      0.4589
-Root mean squared error                  0.5779
-Relative absolute error                 91.7782 %
-Root relative squared error            115.575  %
+Correctly Classified Instances         191               53.2033 %
+Incorrectly Classified Instances       168               46.7967 %
+Kappa statistic                          0.0634
+Mean absolute error                      0.4819
+Root mean squared error                  0.5968
+Relative absolute error                 96.3894 %
+Root relative squared error            119.3592 %
 Total Number of Instances              359     
 
 
 === Confusion Matrix ===
 
    a   b   <-- classified as
-  94  84 |   a = 0
-  77 104 |   b = 4
+  90  87 |   a = 0
+  81 101 |   b = 4
 
