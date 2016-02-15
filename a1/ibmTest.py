@@ -89,46 +89,59 @@ def classify_single_text(username,password,classifier_id,text):
 	
 	return
 
+
 def classify_all_texts(username,password,input_csv_name):
-	# Classifies all texts in an input csv file using all classifiers for a given NLClassifier 
-	# service. 
-	#
-	# Inputs: 
-	# 	username - username for the NLClassifier to be used, as a string
-	#
-	# 	password - password for the NLClassifier to be used, as a string
-	#	
-	#	input_csv_name - full path and name of an input csv file in the  
-	#		6 column format of the input test/training files
-	#
-	# Returns:
-	#	A list of "classifications". Aka: 
-	#	A list of dictionaries, one for each text, in order of lines in the 
-	#	input file. Each element is a dictionary containing the top_class
-	#	and the confidences of all the possible classes (ie the same
-	#	format as returned by classify_single_text) 
-	#	Format example:
-	#		[
-	#			{'top_class': 'class_name',
-	#		 	 'classes': [
-	#					  	{'class_name': 'myclass', 'confidence': 0.999} ,
-	#					  	{'class_name': 'myclass2', 'confidence': 0.001}
-	#						]
-	#			},
-	#			{'top_class': 'class_name',
-	#			...
-	#			}
-	#		]
-	#
-	# Error Handling:
-	#	This function should throw an exception if the classify call fails for any reason 
-	#	or if the input csv file is of an improper format.
-	#
-	
-	#TODO: Fill in this function
-	
-	return
-		
+        # Classifies all texts in an input csv file using all classifiers for a given NLClassifier
+        # service.
+        #
+        # Inputs:
+        #       username - username for the NLClassifier to be used, as a string
+        #
+        #       password - password for the NLClassifier to be used, as a string
+        #      
+        #       input_csv_name - full path and name of an input csv file in the 
+        #              6 column format of the input test/training files
+        #
+        # Returns:
+        #       A dictionary of lists of "classifications".
+        #       Each dictionary key is the name of a classifier.
+        #       Each dictionary value is a list of "classifications" where a
+        #       "classification" is in the same format as returned by
+        #       classify_single_text.
+        #       Each element in the main dictionary is:
+        #       A list of dictionaries, one for each text, in order of lines in the
+        #       input file. Each element is a dictionary containing the top_class
+        #       and the confidences of all the possible classes (ie the same
+        #       format as returned by classify_single_text)
+        #       Format example:
+        #              {‘classifiername’:
+        #                      [
+        #                              {'top_class': 'class_name',
+        #                              'classes': [
+        #                                        {'class_name': 'myclass', 'confidence': 0.999} ,
+        #                                         {'class_name': 'myclass2', 'confidence': 0.001}
+        #                                          ]
+        #                              },
+        #                              {'top_class': 'class_name',
+        #                              ...
+        #                              }
+        #                      ]
+        #              , ‘classifiername2’:
+        #                      [
+        #                      …      
+        #                      ]
+        #              …
+        #              }
+        #
+        # Error Handling:
+        #       This function should throw an exception if the classify call fails for any reason
+        #       or if the input csv file is of an improper format.
+        #
+
+        #TODO: Fill in this function
+        
+        return
+
 
 def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 	# Given a list of "classifications" for a given classifier, compute the accuracy of this
