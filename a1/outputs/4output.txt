@@ -1,0 +1,33 @@
+Accuracy for each classifier, by number of training samples
+
+N = 5000           , N = 2500          , N = 500
+
+[0.7019498607242339, 0.7019498607242339, 0.6657381615598886]
+
+These results show that the Watson classifier is much more accurate than the
+WEKA one.  The WEKA one hovered around 50%, meaning that it was not much better
+than a random guess.  The Watson classifier, however, is significantly more
+accurate than a random guess.  For both classifiers, the number of training
+samples only had a small impact on the overall results, moving the accuracy
+up by only a few percentage points.
+
+
+
+Average confidence in correct and incorrect predictions for each classifier
+
+  Incorrect Preds   , Correct Preds
+
+[[0.8598635146732335, 0.9264322311912503], N = 5000
+ [0.8783337808603239, 0.94176920671881],   N = 2500
+ [0.8672577321084317, 0.9157234826881114]] N = 500
+
+There is a noticable gap in confidence levels between predictions that turned out
+to be correct and predictions that didn't, however it's not as large as one may
+expect.  All three classifiers were quite confident when they were wrong.  It is
+interesting to note that the N = 2500 classifier was the most confident in either
+direction, but still produced the same accuracy as the N = 5000 classifier.  This
+may mean that the 5000 training samples introduced more variance, and brought
+confidence levels down, whereas the N = 2500 classifier was more biased towards
+its' smaller training set.
+
+
