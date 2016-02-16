@@ -1,0 +1,286 @@
+Below are the results from three classifiers from Part 4, using the IBM Watson classifier.
+The test set is grouped by query, and the accuracy is computed per group.
+
+Keeping in mind that the baseline for the three classifiers was around 70% accuracy,
+there are a number of groups that are significantly above or below that accuracy level.
+However, many of these groups have a small number of samples, and are less statistically
+significant.  If we only consider groups with 7 or more samples, and accuracies that are greater
+than 80% or less than 60%, we can draw some interesting conclusions, for the model with N = 5000.
+
+Group: obama                     Accuracy: 1.0                  Number of samples:  10   Number of class 0:   1   Number of class 4:   9
+Group: exam                      Accuracy: 1.0                  Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: g2                        Accuracy: 1.0                  Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: nike                      Accuracy: 0.6                  Number of samples:  15   Number of class 0:   4   Number of class 4:  11
+Group: "night at the museum"     Accuracy: 0.6                  Number of samples:  15   Number of class 0:   3   Number of class 4:  12
+Group: safeway                   Accuracy: 0.571428571429       Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: lebron                    Accuracy: 0.555555555556       Number of samples:  18   Number of class 0:   4   Number of class 4:  14
+Group: gm                        Accuracy: 0.5                  Number of samples:  16   Number of class 0:  16   Number of class 4:   0
+Group: Malcolm Gladwell          Accuracy: 0.5                  Number of samples:  10   Number of class 0:   3   Number of class 4:   7
+Group: at&t                      Accuracy: 0.461538461538       Number of samples:  13   Number of class 0:  13   Number of class 4:   0
+Group: aig                       Accuracy: 0.142857142857       Number of samples:   7   Number of class 0:   7   Number of class 4:   0
+
+So we are extremely accurate at predicting tweets with obama, exams and g2.  These are topics that people are typically extremely
+emotional and passionate about.  This dataset is from 2009, when Barack Obama became President, and this topic was the subject of
+much debate worldwide.  The usage of the word exam is typically either a very negative tweet about having to prepare for exams coming
+up, or a celebratory tweet about having just finished an exam.  The word G2 is significant in Ontario, where it represents the driver's
+license class where one can finally drive on their own, and passing this test is a big achievement in a teenager's life.  I think that
+these three topics are easily predictable by the classifier because they typically involve much stronger sentiment than a regular tweet.
+
+The accuracy for predicting tweets involving companies, like General Motors, AT&T and AIG, is significantly below the baseline.  For these
+tweets, there was a major class imbalance, where all of the test samples were in class 0.  To combat this, we compute precision, recall
+and the F1 score for obama, exam, g2, gm, at&t and aig.
+
+         Precision          Recall          F1 score
+obama    1                  1               1
+exam     1                  1               1
+g2       1                  1               1
+gm       0                  0               0
+at&t     0                  0               0
+aig      0                  0               0
+
+The F1 score shows how much more accurate the classifier is for the first three compared to the second three, and also shows how the accuracy
+isn't really a valid metric when all samples in a group are part of the negative class.
+
+We can, however, re-label the data, and pretend class 0 is positive and class 4 is negative.  After re-labelling, we get the following:
+
+         Precision          Recall          F1 score
+obama    1                  1               1
+exam     1                  1               1
+g2       1                  1               1
+gm       1                  0.5             0.6667  
+at&t     1                  0.4615          0.6316  
+aig      1                  0.1429          0.25
+
+After re-labelling, we can see that GM and AT&T were predicted fairly well, while AIG was predicted poorly.
+
+
+-----------------------
+
+Complete results for the three classifiers.
+
+
+Classifier with N = 5000
+
+Group: obama                     Accuracy: 1.0                  Number of samples:  10   Number of class 0:   1   Number of class 4:   9
+Group: exam                      Accuracy: 1.0                  Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: g2                        Accuracy: 1.0                  Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: insects                   Accuracy: 1.0                  Number of samples:   6   Number of class 0:   5   Number of class 4:   1
+Group: google                    Accuracy: 1.0                  Number of samples:   5   Number of class 0:   1   Number of class 4:   4
+Group: comcast                   Accuracy: 1.0                  Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: sleep                     Accuracy: 1.0                  Number of samples:   4   Number of class 0:   3   Number of class 4:   1
+Group: googleio                  Accuracy: 1.0                  Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: star trek                 Accuracy: 1.0                  Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: viral marketing           Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: "booz allen"              Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: iphone app                Accuracy: 1.0                  Number of samples:   2   Number of class 0:   1   Number of class 4:   1
+Group: mashable                  Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: jquery book               Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: fredwilson                Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: notre dame school         Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: 40d                       Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: espn                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: republican                Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: weka                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: surgery                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: yahoo                     Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: visa card                 Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: twitter                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: wieden                    Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: world cup                 Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: indian election           Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: shoreline amphitheatre    Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: india election            Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: wave sandbox              Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: visa                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: scrapbooking              Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: world cup 2010            Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: north korea               Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   6   Number of class 4:   0
+Group: Bobby Flay                Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   0   Number of class 4:   6
+Group: goodby silverstein        Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   0   Number of class 4:   6
+Group: itchy                     Accuracy: 0.8                  Number of samples:   5   Number of class 0:   5   Number of class 4:   0
+Group: warren buffet             Accuracy: 0.8                  Number of samples:   5   Number of class 0:   0   Number of class 4:   5
+Group: 50d                       Accuracy: 0.8                  Number of samples:   5   Number of class 0:   0   Number of class 4:   5
+Group: kindle2                   Accuracy: 0.764705882353       Number of samples:  17   Number of class 0:   1   Number of class 4:  16
+Group: latex                     Accuracy: 0.75                 Number of samples:   8   Number of class 0:   5   Number of class 4:   3
+Group: iran                      Accuracy: 0.75                 Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: pelosi                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: san francisco             Accuracy: 0.75                 Number of samples:   4   Number of class 0:   3   Number of class 4:   1
+Group: jquery                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   1   Number of class 4:   3
+Group: Danny Gokey               Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: lakers                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: stanford                  Accuracy: 0.714285714286       Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: time warner               Accuracy: 0.666666666667       Number of samples:  33   Number of class 0:  33   Number of class 4:   0
+Group: dentist                   Accuracy: 0.666666666667       Number of samples:  12   Number of class 0:   9   Number of class 4:   3
+Group: lambda calculus           Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   2   Number of class 4:   1
+Group: wolfram alpha             Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: east palo alto            Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: nike                      Accuracy: 0.6                  Number of samples:  15   Number of class 0:   4   Number of class 4:  11
+Group: "night at the museum"     Accuracy: 0.6                  Number of samples:  15   Number of class 0:   3   Number of class 4:  12
+Group: safeway                   Accuracy: 0.571428571429       Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: lebron                    Accuracy: 0.555555555556       Number of samples:  18   Number of class 0:   4   Number of class 4:  14
+Group: gm                        Accuracy: 0.5                  Number of samples:  16   Number of class 0:  16   Number of class 4:   0
+Group: Malcolm Gladwell          Accuracy: 0.5                  Number of samples:  10   Number of class 0:   3   Number of class 4:   7
+Group: mcdonalds                 Accuracy: 0.5                  Number of samples:   6   Number of class 0:   1   Number of class 4:   5
+Group: summize                   Accuracy: 0.5                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: car warranty call         Accuracy: 0.5                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: twitter api               Accuracy: 0.5                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: lyx                       Accuracy: 0.5                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: at&t                      Accuracy: 0.461538461538       Number of samples:  13   Number of class 0:  13   Number of class 4:   0
+Group: "twitter api"             Accuracy: 0.333333333333       Number of samples:   6   Number of class 0:   4   Number of class 4:   2
+Group: cheney                    Accuracy: 0.2                  Number of samples:   5   Number of class 0:   5   Number of class 4:   0
+Group: aig                       Accuracy: 0.142857142857       Number of samples:   7   Number of class 0:   7   Number of class 4:   0
+Group: "naive bayes"             Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: bailout                   Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: bing                      Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: federer                   Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: yankees                   Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Classifier with N = 2500
+
+Group: insects                   Accuracy: 1.0                  Number of samples:   6   Number of class 0:   5   Number of class 4:   1
+Group: comcast                   Accuracy: 1.0                  Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: sleep                     Accuracy: 1.0                  Number of samples:   4   Number of class 0:   3   Number of class 4:   1
+Group: Danny Gokey               Accuracy: 1.0                  Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: wolfram alpha             Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: viral marketing           Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: "booz allen"              Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: mashable                  Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: jquery book               Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: notre dame school         Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: 40d                       Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: espn                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: republican                Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: weka                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: "naive bayes"             Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: bailout                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: surgery                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: yahoo                     Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: visa card                 Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: twitter                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: wieden                    Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: shoreline amphitheatre    Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: wave sandbox              Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: scrapbooking              Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: world cup 2010            Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: exam                      Accuracy: 0.857142857143       Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: safeway                   Accuracy: 0.857142857143       Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: Bobby Flay                Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   0   Number of class 4:   6
+Group: goodby silverstein        Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   0   Number of class 4:   6
+Group: obama                     Accuracy: 0.8                  Number of samples:  10   Number of class 0:   1   Number of class 4:   9
+Group: itchy                     Accuracy: 0.8                  Number of samples:   5   Number of class 0:   5   Number of class 4:   0
+Group: google                    Accuracy: 0.8                  Number of samples:   5   Number of class 0:   1   Number of class 4:   4
+Group: warren buffet             Accuracy: 0.8                  Number of samples:   5   Number of class 0:   0   Number of class 4:   5
+Group: 50d                       Accuracy: 0.8                  Number of samples:   5   Number of class 0:   0   Number of class 4:   5
+Group: time warner               Accuracy: 0.787878787879       Number of samples:  33   Number of class 0:  33   Number of class 4:   0
+Group: dentist                   Accuracy: 0.75                 Number of samples:  12   Number of class 0:   9   Number of class 4:   3
+Group: latex                     Accuracy: 0.75                 Number of samples:   8   Number of class 0:   5   Number of class 4:   3
+Group: iran                      Accuracy: 0.75                 Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: pelosi                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: san francisco             Accuracy: 0.75                 Number of samples:   4   Number of class 0:   3   Number of class 4:   1
+Group: jquery                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   1   Number of class 4:   3
+Group: googleio                  Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: lakers                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: "night at the museum"     Accuracy: 0.733333333333       Number of samples:  15   Number of class 0:   3   Number of class 4:  12
+Group: g2                        Accuracy: 0.714285714286       Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: stanford                  Accuracy: 0.714285714286       Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: kindle2                   Accuracy: 0.705882352941       Number of samples:  17   Number of class 0:   1   Number of class 4:  16
+Group: Malcolm Gladwell          Accuracy: 0.7                  Number of samples:  10   Number of class 0:   3   Number of class 4:   7
+Group: mcdonalds                 Accuracy: 0.666666666667       Number of samples:   6   Number of class 0:   1   Number of class 4:   5
+Group: east palo alto            Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: at&t                      Accuracy: 0.615384615385       Number of samples:  13   Number of class 0:  13   Number of class 4:   0
+Group: nike                      Accuracy: 0.6                  Number of samples:  15   Number of class 0:   4   Number of class 4:  11
+Group: lebron                    Accuracy: 0.5                  Number of samples:  18   Number of class 0:   4   Number of class 4:  14
+Group: gm                        Accuracy: 0.5                  Number of samples:  16   Number of class 0:  16   Number of class 4:   0
+Group: "twitter api"             Accuracy: 0.5                  Number of samples:   6   Number of class 0:   4   Number of class 4:   2
+Group: star trek                 Accuracy: 0.5                  Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: summize                   Accuracy: 0.5                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: car warranty call         Accuracy: 0.5                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: twitter api               Accuracy: 0.5                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: iphone app                Accuracy: 0.5                  Number of samples:   2   Number of class 0:   1   Number of class 4:   1
+Group: lyx                       Accuracy: 0.5                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: fredwilson                Accuracy: 0.5                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: cheney                    Accuracy: 0.4                  Number of samples:   5   Number of class 0:   5   Number of class 4:   0
+Group: north korea               Accuracy: 0.333333333333       Number of samples:   6   Number of class 0:   6   Number of class 4:   0
+Group: lambda calculus           Accuracy: 0.333333333333       Number of samples:   3   Number of class 0:   2   Number of class 4:   1
+Group: aig                       Accuracy: 0.285714285714       Number of samples:   7   Number of class 0:   7   Number of class 4:   0
+Group: bing                      Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: world cup                 Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: indian election           Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: federer                   Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: india election            Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: visa                      Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: yankees                   Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Classifier with N = 500
+
+Group: obama                     Accuracy: 1.0                  Number of samples:  10   Number of class 0:   1   Number of class 4:   9
+Group: comcast                   Accuracy: 1.0                  Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: lakers                    Accuracy: 1.0                  Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: viral marketing           Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: east palo alto            Accuracy: 1.0                  Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: summize                   Accuracy: 1.0                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: car warranty call         Accuracy: 1.0                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: twitter api               Accuracy: 1.0                  Number of samples:   2   Number of class 0:   2   Number of class 4:   0
+Group: mashable                  Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: jquery book               Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: fredwilson                Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: notre dame school         Accuracy: 1.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: espn                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: republican                Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: weka                      Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: bailout                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: surgery                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: yahoo                     Accuracy: 1.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: twitter                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: wieden                    Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: world cup                 Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: indian election           Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: federer                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: wave sandbox              Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: world cup 2010            Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: yankees                   Accuracy: 1.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: time warner               Accuracy: 0.878787878788       Number of samples:  33   Number of class 0:  33   Number of class 4:   0
+Group: exam                      Accuracy: 0.857142857143       Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: insects                   Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   5   Number of class 4:   1
+Group: "twitter api"             Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   4   Number of class 4:   2
+Group: goodby silverstein        Accuracy: 0.833333333333       Number of samples:   6   Number of class 0:   0   Number of class 4:   6
+Group: itchy                     Accuracy: 0.8                  Number of samples:   5   Number of class 0:   5   Number of class 4:   0
+Group: google                    Accuracy: 0.8                  Number of samples:   5   Number of class 0:   1   Number of class 4:   4
+Group: warren buffet             Accuracy: 0.8                  Number of samples:   5   Number of class 0:   0   Number of class 4:   5
+Group: dentist                   Accuracy: 0.75                 Number of samples:  12   Number of class 0:   9   Number of class 4:   3
+Group: iran                      Accuracy: 0.75                 Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: pelosi                    Accuracy: 0.75                 Number of samples:   4   Number of class 0:   4   Number of class 4:   0
+Group: sleep                     Accuracy: 0.75                 Number of samples:   4   Number of class 0:   3   Number of class 4:   1
+Group: googleio                  Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: star trek                 Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: Danny Gokey               Accuracy: 0.75                 Number of samples:   4   Number of class 0:   0   Number of class 4:   4
+Group: aig                       Accuracy: 0.714285714286       Number of samples:   7   Number of class 0:   7   Number of class 4:   0
+Group: nike                      Accuracy: 0.666666666667       Number of samples:  15   Number of class 0:   4   Number of class 4:  11
+Group: Bobby Flay                Accuracy: 0.666666666667       Number of samples:   6   Number of class 0:   0   Number of class 4:   6
+Group: lambda calculus           Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   2   Number of class 4:   1
+Group: wolfram alpha             Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: "booz allen"              Accuracy: 0.666666666667       Number of samples:   3   Number of class 0:   1   Number of class 4:   2
+Group: gm                        Accuracy: 0.625                Number of samples:  16   Number of class 0:  16   Number of class 4:   0
+Group: latex                     Accuracy: 0.625                Number of samples:   8   Number of class 0:   5   Number of class 4:   3
+Group: Malcolm Gladwell          Accuracy: 0.6                  Number of samples:  10   Number of class 0:   3   Number of class 4:   7
+Group: kindle2                   Accuracy: 0.588235294118       Number of samples:  17   Number of class 0:   1   Number of class 4:  16
+Group: stanford                  Accuracy: 0.571428571429       Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: san francisco             Accuracy: 0.5                  Number of samples:   4   Number of class 0:   3   Number of class 4:   1
+Group: jquery                    Accuracy: 0.5                  Number of samples:   4   Number of class 0:   1   Number of class 4:   3
+Group: 40d                       Accuracy: 0.5                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: "night at the museum"     Accuracy: 0.466666666667       Number of samples:  15   Number of class 0:   3   Number of class 4:  12
+Group: at&t                      Accuracy: 0.461538461538       Number of samples:  13   Number of class 0:  13   Number of class 4:   0
+Group: lebron                    Accuracy: 0.444444444444       Number of samples:  18   Number of class 0:   4   Number of class 4:  14
+Group: safeway                   Accuracy: 0.428571428571       Number of samples:   7   Number of class 0:   5   Number of class 4:   2
+Group: cheney                    Accuracy: 0.4                  Number of samples:   5   Number of class 0:   5   Number of class 4:   0
+Group: north korea               Accuracy: 0.333333333333       Number of samples:   6   Number of class 0:   6   Number of class 4:   0
+Group: mcdonalds                 Accuracy: 0.333333333333       Number of samples:   6   Number of class 0:   1   Number of class 4:   5
+Group: g2                        Accuracy: 0.285714285714       Number of samples:   7   Number of class 0:   0   Number of class 4:   7
+Group: 50d                       Accuracy: 0.2                  Number of samples:   5   Number of class 0:   0   Number of class 4:   5
+Group: iphone app                Accuracy: 0.0                  Number of samples:   2   Number of class 0:   1   Number of class 4:   1
+Group: lyx                       Accuracy: 0.0                  Number of samples:   2   Number of class 0:   0   Number of class 4:   2
+Group: "naive bayes"             Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: visa card                 Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: bing                      Accuracy: 0.0                  Number of samples:   1   Number of class 0:   1   Number of class 4:   0
+Group: shoreline amphitheatre    Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: india election            Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: visa                      Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
+Group: scrapbooking              Accuracy: 0.0                  Number of samples:   1   Number of class 0:   0   Number of class 4:   1
