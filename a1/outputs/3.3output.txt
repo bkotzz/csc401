@@ -1,3 +1,32 @@
+It can be seen that there are two features in particular that retain their importance at
+both high and low volumes of training data.  Those two features are the average token length,
+and the number of second-person pronouns.
+
+A possible explanation for token length retaining its' importance across training set sizes
+is that it is one of the few features that is non-zero across all examples, other than tweets
+that don't have any tokens left after preproessing.  This is in contrast to features like
+ellipses, that occur infrequently.  Also, the average token length is generally between 4 and 5,
+whereas many other features are less than 1 on average.  This is important because many other
+features have a small variance, as they are squashed up against zero, whereas token length
+has a much larger variance.  This high variance means that a less sensitive model can pick up
+on the variations in token length amongst tweets.  This variance then may be highly correlated
+with the class label because of some tendencies of twitter users.  For example, it's possible
+that twitter users take more time to type out positive tweets, and therefore use longer words,
+but hastily send out negative tweets using shorter words (or vice versa).
+
+A possible explanation for second person pronouns retaining their importance with both lower
+and higher amounts of data is that this feature has a high enough signal that occurs frequently
+enough in training samples, that its' correlation with the output is strong, regardless of how
+many training samples have been seen.  The high signal of this feature may be because of how
+people tend to talk about others versus themselves.  It may be that twitter users tend to
+be polite, and talk about others (using second person pronouns) in a more positive light, and
+may talk about themselves (not using second person pronouns) in a negative light, in a more 
+humble, self-critical manner.  This may mean that positive tweets have several second person
+pronouns on average, whereas negative tweets tend to have around zero.  With such a difference
+in this feature between the two classes, combined with a strong correlation with the output,
+this would explain why second person pronouns have such a high information gain for both
+training sizes.
+
 N = 500
 
 === Attribute Selection on all input data ===
@@ -32,8 +61,9 @@ Ranked attributes:
 
 Selected attributes: 19,2,9,6,8,7,3,1,5,4,16,15,20,17,18,11,10,14,12,13 : 20
 
-N = 5500
 
+
+N = 5500
 
 === Attribute Selection on all input data ===
 
@@ -44,26 +74,26 @@ Attribute Evaluator (supervised, Class (nominal): 21 class):
 	Information Gain Ranking Filter
 
 Ranked attributes:
- 0.02849   19 token_length
- 0.02291    2 second_person_pronouns
- 0.00659    9 dashes
- 0          6 future_tense_verbs
- 0          8 colons
- 0          7 commas
- 0          3 third_person_pronouns
- 0          1 first_person_pronouns
- 0          5 past_tense_verbs
- 0          4 coordinating_conjunctions
- 0         16 slang_acronyms
- 0         15 wh_words
- 0         20 number_sentences
- 0         17 upper_case_words
- 0         18 sentence_length
- 0         11 ellipses
- 0         10 parantheses
- 0         14 adverbs
- 0         12 common_nouns
- 0         13 proper_nouns
+ 0.030705    2 second_person_pronouns
+ 0.018046   19 token_length
+ 0.007162    1 first_person_pronouns
+ 0.005225    5 past_tense_verbs
+ 0.004119   13 proper_nouns
+ 0.004078   14 adverbs
+ 0.002455    9 dashes
+ 0.001679   12 common_nouns
+ 0.001525   17 upper_case_words
+ 0.001404   20 number_sentences
+ 0.001043    7 commas
+ 0.000826    4 coordinating_conjunctions
+ 0.000682   10 parantheses
+ 0.000587    6 future_tense_verbs
+ 0           3 third_person_pronouns
+ 0          18 sentence_length
+ 0          16 slang_acronyms
+ 0           8 colons
+ 0          15 wh_words
+ 0          11 ellipses
 
-Selected attributes: 19,2,9,6,8,7,3,1,5,4,16,15,20,17,18,11,10,14,12,13 : 20
+Selected attributes: 2,19,1,5,13,14,9,12,17,20,7,4,10,6,3,18,16,8,15,11 : 20
 

@@ -1,27 +1,91 @@
+######## Note: The training dataset used contains the 11,000 samples corresponding to my group ID, not the entire dataset.
+########
+######## Naive Bayes classifier:
+######## This model had the highest accuracy on test data, and therefore is chosen as the best classifier.
 
-Time taken to build model: 2.2 seconds
-Time taken to test model on training data: 0.15 seconds
+Time taken to build model: 0.14 seconds
+Time taken to test model on training data: 0.32 seconds
 
 === Error on training data ===
 
-Correctly Classified Instances        9012               81.9273 %
-Incorrectly Classified Instances      1988               18.0727 %
-Kappa statistic                          0.6385
-Mean absolute error                      0.2656
-Root mean squared error                  0.3644
-Relative absolute error                 53.1157 %
-Root relative squared error             72.8805 %
+Correctly Classified Instances        6650               60.4545 %
+Incorrectly Classified Instances      4350               39.5455 %
+Kappa statistic                          0.2091
+Mean absolute error                      0.4355
+Root mean squared error                  0.5068
+Relative absolute error                 87.1078 %
+Root relative squared error            101.3635 %
 Total Number of Instances            11000     
 
 
 === Error on test data ===
 
-Correctly Classified Instances         198               55.1532 %
-Incorrectly Classified Instances       161               44.8468 %
-Kappa statistic                          0.1027
-Mean absolute error                      0.4589
-Root mean squared error                  0.5779
-Relative absolute error                 91.7782 %
-Root relative squared error            115.575  %
+Correctly Classified Instances         193               53.7604 %
+Incorrectly Classified Instances       166               46.2396 %
+Kappa statistic                          0.0756
+Mean absolute error                      0.4835
+Root mean squared error                  0.5598
+Relative absolute error                 96.7034 %
+Root relative squared error            111.9506 %
+Total Number of Instances              359     
+
+#######
+####### Support Vector Machine classifier
+#######
+
+Time taken to build model: 1.85 seconds
+Time taken to test model on training data: 0.19 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances        6903               62.7545 %
+Incorrectly Classified Instances      4097               37.2455 %
+Kappa statistic                          0.2551
+Mean absolute error                      0.3725
+Root mean squared error                  0.6103
+Relative absolute error                 74.4909 %
+Root relative squared error            122.0581 %
+Total Number of Instances            11000     
+
+
+=== Error on test data ===
+
+Correctly Classified Instances         190               52.9248 %
+Incorrectly Classified Instances       169               47.0752 %
+Kappa statistic                          0.0588
+Mean absolute error                      0.4708
+Root mean squared error                  0.6861
+Relative absolute error                 94.1504 %
+Root relative squared error            137.2228 %
+Total Number of Instances              359     
+
+#######
+####### Decision Tree classifier
+#######
+
+Time taken to build model: 1.86 seconds
+Time taken to test model on training data: 0.13 seconds
+
+=== Error on training data ===
+
+Correctly Classified Instances        9004               81.8545 %
+Incorrectly Classified Instances      1996               18.1455 %
+Kappa statistic                          0.6371
+Mean absolute error                      0.2668
+Root mean squared error                  0.3652
+Relative absolute error                 53.361  %
+Root relative squared error             73.0486 %
+Total Number of Instances            11000     
+
+
+=== Error on test data ===
+
+Correctly Classified Instances         191               53.2033 %
+Incorrectly Classified Instances       168               46.7967 %
+Kappa statistic                          0.0634
+Mean absolute error                      0.4819
+Root mean squared error                  0.5968
+Relative absolute error                 96.3894 %
+Root relative squared error            119.3592 %
 Total Number of Instances              359     
 

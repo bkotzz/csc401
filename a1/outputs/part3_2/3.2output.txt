@@ -1,4 +1,5 @@
-Using Bayes
+Using the Naive Bayes classifier, where N
+is the number of training samples from each class.
 
 N            Correct Preds     Accuracy
 
@@ -13,3 +14,21 @@ N            Correct Preds     Accuracy
 4500         196               54.5961 %
 5000         191               53.2033 %
 5500         193               53.7604 %
+
+As the training samples increase, there is a sharp increase
+in accuracy, but the accuracy plateaus at around 53% for
+N greater than 1000.  Usually, we would expect the accuracy to increase
+when increasing the size of the training set.
+
+This could be because the first 1000
+or so training samples represent the underlying distribution of the
+data to a certain extent, and the additional training samples are
+highly correlated with the first 1000, and therefore are redundant
+and don't provide the classifier with any new information to improve predictions.
+
+Another reason could be that the additional training samples added
+after the first 1000 or so are very uncorrelated with the test
+data, and adding these extra training samples doesn't help the
+model to explain any more of the variance of the test data.  When testing
+on the test set, it's possible that the predictions are being made using 
+inferences that are predominantly from the first 1000 or so training samples.

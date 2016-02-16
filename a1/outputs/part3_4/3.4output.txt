@@ -1,4 +1,9 @@
+The following results are reported using the Naive Bayes classifier,
+using 10-fold cross validation, on training sets of size 9900 and
+validation sets of size 1100, each with an equal number of samples
+from both classes.
 
+The t-test results are reported at the bottom.
 
 Partition 0:
 
@@ -128,3 +133,25 @@ Precision - A: 0.573454 %
             B: 0.675926 %
 Recall - A: 0.809091 %
          B: 0.398182 %
+
+
+
+T-test results:
+
+The 10-fold cross-validation results are as follows:
+
+Bayes: [0.600909, 0.600909, 0.589091, 0.606364, 0.600909, 0.591818, 0.606364, 0.622727, 0.602727, 0.603636]
+SVM: [0.627273, 0.636364, 0.629091, 0.619091, 0.604545, 0.600909, 0.612727, 0.647273, 0.629091, 0.627273]
+Decision Tree: [0.595455, 0.575455, 0.570909, 0.614545, 0.588182, 0.562727, 0.590909, 0.619091, 0.605455, 0.595455]
+
+Bayes - SVM           P value: 0.00047429762364468813
+Decision Tree - SVM   P value: 0.00028945861979066696
+Decision Tree - Bayes P value: 0.018540590062955789
+
+If we assume a threshold of 1%, the Bayes - SVM and Decision Tree - SVM p values are small enough
+that we can reject the null hypothesis of equal averages, meaning that we can acknowledge that
+the expected values of the accuracies of these classifier pairs is statistically different.
+
+For the Decision Tree - Bayes pair, the p value may be high enough that we can't reject the null hypothesis,
+and have to keep in consideration that the two classifiers may have identical expected values.
+
