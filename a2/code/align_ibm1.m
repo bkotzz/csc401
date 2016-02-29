@@ -29,25 +29,29 @@ function AM = align_ibm1(trainDir, numSentences, maxIter, fn_AM)
 % 
 % Template (c) 2011 Jackie C.K. Cheung and Frank Rudzicz
   
-  global CSC401_A2_DEFNS
-  
-  AM = struct();
-  
-  % Read in the training data
-  [eng, fre] = read_hansard(trainDir, numSentences);
+    global CSC401_A2_DEFNS
 
-  % Initialize AM uniformly 
-  AM = initialize(eng, fre);
+    AM = struct();
 
-  % Iterate between E and M steps
-  for iter=1:maxIter,
-    AM = em_step(AM, eng, fre);
-  end
+    % Read in the training data
+    [eng, fre] = read_hansard(trainDir, numSentences);
 
-  % Save the alignment model
-  save( fn_AM, 'AM', '-mat'); 
+    disp('Initializing...')
+    % Initialize AM uniformly 
+    AM = initialize(eng, fre);
 
-  end
+
+    % Iterate between E and M steps
+    for iter=1:maxIter
+        disp('EM step:')
+        disp(iter)
+        AM = em_step(AM, eng, fre);
+    end
+
+    % Save the alignment model
+    save( fn_AM, 'AM', '-mat'); 
+
+end
 
 
 
@@ -59,12 +63,12 @@ function AM = align_ibm1(trainDir, numSentences, maxIter, fn_AM)
 %
 % --------------------------------------------------------------------------------
 
-function retStruct = read_language(files, dataDir)
+function retStruct = read_language(files, dataDir, language, numSentences)
     retStruct = {};
     lineCount = 1;
     
     for iFile=1:length(files)
-
+        disp('Reading file:')
         disp(iFile)
         lines = textread([dataDir, filesep, files(iFile).name], '%s', 'delimiter', '\n');
 
@@ -74,6 +78,9 @@ function retStruct = read_language(files, dataDir)
             words = strsplit(' ', processedLine);
             
             retStruct{lineCount} = words;
+            if lineCount == numSentences
+                return;
+            end
             lineCount = lineCount + 1;
         end
     end
@@ -98,8 +105,8 @@ function [eng, fre] = read_hansard(mydir, numSentences)
     DD_eng = dir([mydir, filesep, '*.e']);
     DD_fre = dir([mydir, filesep, '*.f']);
 
-    eng = read_language(DD_eng, mydir);
-    fre = read_language(DD_fre, mydir);
+    eng = read_language(DD_eng, mydir, 'e', numSentences);
+    fre = read_language(DD_fre, mydir, 'f', numSentences);
 
 end
 
@@ -111,19 +118,20 @@ function AM = initialize(eng, fre)
 %
     AM = {}; % AM.(english_word).(foreign_word)
 
-    assert(length(eng) == length(fre))
+    % We should have the same number of sentences, since we only
+    % have 1:1 mappings
+    assert(length(eng) == length(fre));
     
     % First pass: For every english word we see,
     % add an entry for every french word in an aligned sentence
     for iSent=1:length(eng)
         engSentence = eng{iSent};
         freSentence = fre{iSent};
-        assert(length(engSentence) == length(freSentence));
         
         for iEngWord=1:length(engSentence)
             engWord = engSentence{iEngWord};
             for iFreWord=1:length(freSentence)
-                freWord = engSentence{iFreWord};
+                freWord = freSentence{iFreWord};
                 AM.(engWord).(freWord) = 1;
             end
         end
@@ -172,7 +180,6 @@ function t = em_step(t, eng, fre)
     for iSent=1:length(eng)
         engSentence = eng{iSent};
         freSentence = fre{iSent};
-        assert(length(engSentence) == length(freSentence));
         
         uniqueEng = create_histogram(engSentence);
         uniqueEngWords = fieldnames(uniqueEng);
@@ -181,20 +188,20 @@ function t = em_step(t, eng, fre)
 
 %       for each unique word f in F:
         for iFre=1:length(uniqueFreWords)
-            f = uniqueFreWords.(uniqueFreWords{iFre});
+            f = uniqueFreWords{iFre};
             
 %           denom_c = 0
             denom_c = 0;
 %           for each unique word e in E:
             for iEng=1:length(uniqueEngWords)
-                e = uniqueEngWords.(uniqueEngWords{iEng});
+                e = uniqueEngWords{iEng};
                 
 %               denom_c += P(f|e) * F.count(f)
                 denom_c = denom_c + t.(e).(f) * uniqueFre.(f);
             end
 %           for each unique word e in E:
             for iEng=1:length(uniqueEngWords)
-                e = uniqueEngWords.(uniqueEngWords{iEng});
+                e = uniqueEngWords{iEng};
                 
 %               total(e) += P(f|e) * F.count(f) * E.count(e) / denom_c            
                 toAdd = t.(e).(f) * uniqueFre.(f) * uniqueEng.(e) / denom_c;
