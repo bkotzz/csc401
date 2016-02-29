@@ -46,27 +46,27 @@ for iFile=1:length(DD)
 
         % TODO: THE STUDENT IMPLEMENTS THE FOLLOWING
         for word_index=1:length(words) - 1
-            curr_word = words{word_index};
-            next_word = words{word_index + 1};
+            currWord = words{word_index};
+            nextWord = words{word_index + 1};
 
-            if ~isfield(LM.uni, curr_word)
-                LM.uni.(curr_word) = 0;
+            if ~isfield(LM.uni, currWord)
+                LM.uni.(currWord) = 0;
             end
-            if ~isfield(LM.bi, curr_word) || ~isfield(LM.bi.(curr_word), next_word)
-                LM.bi.(curr_word).(next_word) = 0;
+            if ~isfield(LM.bi, currWord) || ~isfield(LM.bi.(currWord), nextWord)
+                LM.bi.(currWord).(nextWord) = 0;
             end
 
-            LM.uni.(curr_word) = LM.uni.(curr_word) + 1;
-            LM.bi.(curr_word).(next_word) = LM.bi.(curr_word).(next_word) + 1;
+            LM.uni.(currWord) = LM.uni.(currWord) + 1;
+            LM.bi.(currWord).(nextWord) = LM.bi.(currWord).(nextWord) + 1;
         end
 
-        last_word = words{end};
+        lastWord = words{end};
 
-        if ~isfield(LM.uni, last_word)
-            LM.uni.(last_word) = 0;
+        if ~isfield(LM.uni, lastWord)
+            LM.uni.(lastWord) = 0;
         end
 
-        LM.uni.(last_word) = LM.uni.(last_word) + 1;
+        LM.uni.(lastWord) = LM.uni.(lastWord) + 1;
 
         % TODO: THE STUDENT IMPLEMENTED THE PRECEDING
     end
