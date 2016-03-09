@@ -25,7 +25,7 @@ N         = 0;
 vocabSize = length(fields(LM.uni));
 
 for iFile=1:length(DD)
-
+  disp(iFile)
   lines = textread([testDir, filesep, DD(iFile).name], '%s','delimiter','\n');
 
   for l=1:length(lines)

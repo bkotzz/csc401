@@ -29,7 +29,6 @@ function logProb = lm_prob(sentence, LM, type, delta, vocabSize)
     end
     if (isempty(type))
         delta = 0;
-        vocabSize = length(fieldnames(LM.uni));
     elseif strcmp(type, 'smooth')
         if (nargin < 5)  
             disp('lm_prob: if you specify smoothing, you need all 5 parameters');
