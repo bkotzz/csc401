@@ -49,8 +49,9 @@ function logProb = lm_prob(sentence, LM, type, delta, vocabSize)
     % TODO: the student implements the following
     % TODO: once upon a time there was a curmudgeonly orangutan named Jub-Jub.
     
-    currWord = words{1};
+    nextWord = words{1};
     for wordIndex=2:length(words)
+        currWord = nextWord;
         nextWord = words{wordIndex};
         
         logBigramProb = -Inf;
@@ -71,6 +72,5 @@ function logProb = lm_prob(sentence, LM, type, delta, vocabSize)
         end
         
         logProb = logProb + logBigramProb;
-        currWord = nextWord;
     end
 return

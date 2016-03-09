@@ -21,7 +21,7 @@ function outSentence = preprocess( inSentence, language )
 
     % first, convert the input sentence to lower-case and add sentence marks
     % string is array of characters, place spaces in between
-    inSentence = [CSC401_A2_DEFNS.SENTSTART ' ' lower(inSentence) ' ' CSC401_A2_DEFNS.SENTEND];
+    inSentence = [CSC401_A2_DEFNS.SENTSTART ' ' strtrim(lower(inSentence)) ' ' CSC401_A2_DEFNS.SENTEND];
 
     % trim whitespaces down
     % \s matches any whitespace character one or more times
@@ -35,20 +35,26 @@ function outSentence = preprocess( inSentence, language )
     %    e.g., outSentence = regexprep( outSentence, 'TODO', 'TODO');
     
     % Seperate EOS punctuation, which we will take to be .?!, whether or
-    % not it is followed by double quotes
-    outSentence = regexprep(outSentence, '[.?!]$', ' $0');
-    outSentence = regexprep(outSentence, '[.?!]"$', ' $0');
+    % not it is followed by double quotes or two single quotes.  We only
+    % separate periods at the end, in order to not break up things like Mr.
+    % but separate ?! anywhere in the sentence, as they could be in quotes.
+    % If we see multiple periods, we can safely separate.
+    outSentence = regexprep(outSentence, ['\.("|'''')?' ' ' CSC401_A2_DEFNS.SENTEND], ' $0');
+    outSentence = regexprep(outSentence, '\.\.+', ' $0 ');
+    outSentence = regexprep(outSentence, '[?!]+', ' $0 ');
     
-    % Seperate ,:;()[]{}"&
-    outSentence = regexprep(outSentence, '[,:;"&()[]{}]', ' $0 ');
+    % Separate multiple 
     
-    % Seperate math operators <>=+-/*^
+    % Seperate ,:;()[]{}"&`$
+    outSentence = regexprep(outSentence, '[,:;"&()[]{}`$]', ' $0 ');
+    
+    % Seperate math operators %<>=+-/*^
     % Note: can't split minus operator, because this is the same as a dash,
     %       and we are only splitting dashes inside parantheses
-    outSentence = regexprep(outSentence, '[<>=+-/*^]', ' $0 ');
+    outSentence = regexprep(outSentence, '[%<>=+/*^]', ' $0 ');
     
     % Now we split the dash/minus operator, but only within parantheses ()
-    outSentence = regexprep(outSentence, '(\(.*)-(.*\))', '$1 - $2');
+    outSentence = regexprep(outSentence, '(?<=\(.*)-(?=.*\))', ' - ');
 
     switch language
     case 'e'
