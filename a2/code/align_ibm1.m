@@ -128,9 +128,9 @@ function AM = initialize(eng, fre)
         engSentence = eng{iSent};
         freSentence = fre{iSent};
         
-        for iEngWord=1:length(engSentence)
+        for iEngWord=2:length(engSentence) - 1 % Skip START/END
             engWord = engSentence{iEngWord};
-            for iFreWord=1:length(freSentence)
+            for iFreWord=2:length(freSentence) - 1 % Skip START/END
                 freWord = freSentence{iFreWord};
                 AM.(engWord).(freWord) = 1;
             end
@@ -149,6 +149,10 @@ function AM = initialize(eng, fre)
             engField.(freFields{iFreField}) = 1 / denominator;
         end
     end
+    
+    % Add in SENTSTART/SENTEND
+    AM.SENTSTART.SENTSTART = 1;
+    AM.SENTEND.SENTEND     = 1;
 end
 
 function retStruct = safe_add(inStruct, field, toAdd)
@@ -161,7 +165,7 @@ end
 
 function hist = create_histogram(sentence)
     hist = struct();
-    for i=1:length(sentence)
+    for i=2:length(sentence) - 1 % Skip START/END
         currWord = sentence{i};
         hist = safe_add(hist, currWord, 1);
     end

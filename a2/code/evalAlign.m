@@ -14,11 +14,11 @@ function evalAlign()
     fn_testF     = '../data/Hansard/Testing/Task5.f';
     fn_testgE    = '../data/Hansard/Testing/Task5.google.e';
     fn_testE     = '../data/Hansard/Testing/Task5.e';
-    lm_type      = 'smooth';
-    delta        = 0.01;
+    lm_type      = '';
+    delta        = 0;
     vocabSize    = 20; 
-    numSentences = 20;
-    maxIter      = 100;
+    numSentences = 1000;
+    maxIter      = 10;
 
     % Bluemix credentials
     username = '"2ece4403-60be-49d6-963d-6bb104400af0"';
@@ -52,12 +52,17 @@ function evalAlign()
         % Decode the test sentence 'fre'
         eng = decode(fre, LM, AM, lm_type, delta, vocabSize);
 
+        cand = strjoin(eng);
+        ref1 = preprocess(egLines{l});
+        ref2 = preprocess(eLines{l});
+        ref3 = preprocess(result);
+        
         disp(l)
-        disp(strjoin(eng))
-        disp(egLines{l})
-        disp(eLines{l})
-        disp(result)
-        disp(bleu_score(strjoin(eng), {egLines{l}, eLines{l}, result})
+        disp(cand)
+        disp(ref1)
+        disp(ref2)
+        disp(ref3)
+        disp(bleu_score(strjoin(eng), {ref1, ref2, ref3}))
     end
 end
 
@@ -99,7 +104,7 @@ function bleu = bleu_score(candidate, references, n)
     histogram = create_histogram(references);
     
     % Hardcoded to only use up to trigrams
-    words = strsplit(' ', reference);
+    words = strsplit(' ', candidate);
 
     unigram_count = 0;
     bigram_count = 0;
@@ -140,5 +145,5 @@ function bleu = bleu_score(candidate, references, n)
     
     penalty = bleu_penalty(candidate, ref_words);
     
-    bleu = penalty * unigram_precision * bigram_precision * trigram_precision;
+    bleu = penalty * (unigram_precision * bigram_precision * trigram_precision).^(1 / n);
 end

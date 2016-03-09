@@ -1,3 +1,6 @@
+These results show that increasing the delta smoothing provides
+a weaker model.  The perplexity increases monotonically with delta.
+
 English:
 
 MLE         13.0791
