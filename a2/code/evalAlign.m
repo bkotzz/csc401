@@ -10,7 +10,7 @@ function evalAlign()
     testDir      = '../data/Hansard/Testing';
     fn_LME       = '../data/Hansard/lm_e_hansard';
     fn_LMF       = '../data/Hansard/lm_f_hansard';
-    fn_AMFE      = '../data/Hansard/am_hansard';
+    fn_AMFE      = '../data/Hansard/am_hansard_1k';
     fn_testF     = '../data/Hansard/Testing/Task5.f';
     fn_testgE    = '../data/Hansard/Testing/Task5.google.e';
     fn_testE     = '../data/Hansard/Testing/Task5.e';
@@ -43,34 +43,39 @@ function evalAlign()
     eLines = textread(fn_testE, '%s', 'delimiter', '\n');
 
     for l=1:length(fLines)
-        fre = preprocess(fLines{l}, 'f');
-
-        curl = ['curl -u ' username ':' password '-X POST -F "text=' fre '" -F "source=fr" -F "target=en"' url];
+        
+        curl = ['curl -u ' username ':' password ' -X POST -F "text=' fLines{l} '" -F "source=fr" -F "target=en" ' url];
         disp(curl);
-        [status, result] = unix(['env LD_LIBRARY_PATH=''''' curl]);
-
+        [status, result] = unix(curl); % 'env LD_LIBRARY_PATH='''''
+        disp(status)
+        
         % Decode the test sentence 'fre'
-        eng = decode(fre, LM, AM, lm_type, delta, vocabSize);
+        fre = preprocess(fLines{l}, 'f');
+        eng1 = decode(fre, LM, AM, lm_type, delta, vocabSize);
+        eng2 = decode2(fre, LM, AM, lm_type, delta, vocabSize);
 
-        cand = strjoin(eng);
-        ref1 = preprocess(egLines{l});
-        ref2 = preprocess(eLines{l});
-        ref3 = preprocess(result);
+        cand1 = strjoin(eng1);
+        cand2 = strjoin(eng2);
+        ref1 = preprocess(egLines{l}, 'f');
+        ref2 = preprocess(eLines{l}, 'f');
+        ref3 = preprocess(result, 'f');
         
         disp(l)
-        disp(cand)
-        disp(ref1)
-        disp(ref2)
-        disp(ref3)
-        disp(bleu_score(strjoin(eng), {ref1, ref2, ref3}))
+        disp(['French Sentence: ' fre])
+        disp(['Candidate: ' cand1])
+        disp(['Candidate: ' cand2])
+        disp(['Google Translate: ' ref1])
+        disp(['Hansard: ' ref2])
+        disp(['IBM Watson: ' ref3])
+        disp(bleu_score(strjoin(eng1), {ref1, ref2, ref3}, 1))
     end
 end
 
 function pen = bleu_penalty(candidate, references)
     closest_ref = Inf;
-    cand_len = length(candidate);
+    cand_len = length(candidate) - 2; % Subtract START/END
     for j=1:length(references)
-        ref_len = length(strsplit(' ', processedLine));
+        ref_len = length(strsplit(' ', references{j})) - 2; % Subtract START/END
         closest_ref = min(closest_ref, abs(ref_len - cand_len));
     end
     
@@ -84,9 +89,10 @@ function hist = create_histogram(references)
         reference = references{i};
         words = strsplit(' ', reference);
         
-        secondWord = words{1};
-        thirdWord = words{2};
-        for j=3:length(words)
+        % Skip SENTSTART/SENTEND
+        secondWord = words{2};
+        thirdWord = words{3};
+        for j=4:length(words) - 1
             firstWord = secondWord;
             secondWord = thirdWord;
             thirdWord = words{j};
@@ -105,14 +111,16 @@ function bleu = bleu_score(candidate, references, n)
     
     % Hardcoded to only use up to trigrams
     words = strsplit(' ', candidate);
-
+    num_cand_words = length(words) - 2; % Skip SENTSTART/SENDEND
+    
     unigram_count = 0;
     bigram_count = 0;
     trigram_count = 0;
     
-    secondWord = words{1};
-    thirdWord = words{2};
-    for j=3:length(words)
+    % Skip SENTSTART/SENDEND
+    secondWord = words{2};
+    thirdWord = words{3};
+    for j=4:length(words) - 1
         firstWord = secondWord;
         secondWord = thirdWord;
         thirdWord = words{j};
@@ -139,11 +147,11 @@ function bleu = bleu_score(candidate, references, n)
         unigram_count = unigram_count + 1;
     end
     
-    unigram_precision = unigram_count / length(reference);
-    bigram_precision  = (n > 1) * bigram_count /  (length(reference) - 1) + (n <= 1);
-    trigram_precision = (n > 2) * trigram_count / (length(reference) - 2) + (n <= 2);
+    unigram_precision = unigram_count / length(num_cand_words);
+    bigram_precision  = (n > 1) * bigram_count /  (length(num_cand_words) - 1) + (n <= 1);
+    trigram_precision = (n > 2) * trigram_count / (length(num_cand_words) - 2) + (n <= 2);
     
-    penalty = bleu_penalty(candidate, ref_words);
+    penalty = bleu_penalty(candidate, references);
     
     bleu = penalty * (unigram_precision * bigram_precision * trigram_precision).^(1 / n);
 end

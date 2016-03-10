@@ -79,7 +79,12 @@ function [output,prob] = argmaxN_targetlanguage(target_word,align_model,N)
 				output = source_words{i};
 			end
 		end
-	end
+    end
+    
+    if strcmp(output, 'UNK')
+        disp('Error')
+        disp(target_word)
+    end
 end
 
 function [output,output_val] = get_max_struct(the_struct)
