@@ -1,3 +1,37 @@
+The 12 BLEU scores are reported below, using the MLE language model.
+
+If you compare the reference translations, it is noticable that Google/Watson
+use much more puntuation and abbreviations than the Hansard. This is likely because
+the Hansard is an official document where the scribes reluctantly use short forms.
+The English Hansard uses periods where there weren't any in French, showing that
+it was up to interpretation wthether or not the speaker's sentence was actually finished
+or not. Google/Watson use more direct translation and have less ability to understand
+an idiom in either language. For example, Google/Watson translate 'la coeur du debat'
+as 'the heart of the debate', which is a very literal translation, but isn't as common
+in English. Another example is where the English Hansard is able to pick up 'deep cuts
+to the budget', but Google/Watson both can't translate it to anything meaningful in english.
+
+Using fewer references means that n-gram precisions will be lower. This is likely worse,
+since it lends to the idea that there is only one correct answer for a translation. For
+example, when looking at line 12, the three references use 3 different synonyms (stop,
+end and terminate). While these all have the same meaning, using fewer references means
+that we are discounting our n-gram precisions and overall accuracy because the candidate
+didn't include the exact same synonym as the reference, which isn't a meaningful reason.
+All three of these synonyms should all be deemed correct, so having fewer than 3 references
+is bad because they don't capture the variance of possible correct translations.
+
+The results of the translations show that having a larger alignment model helps to produce
+more uncommon words in the translations, rather than translating to a more common english
+word that is only slightly related in meaning. This helps to improve BLEU scores. However,
+many trigram precisions force the BLEU score to zero, regardless of the alignment model.
+This is because our language model was built using a very strong markov assumption, with
+only bigram and unigram counts to get an MLE estimate. This means that our language model
+doesn't have enough context in general to produce accuracte tri-gram orderings.
+
+
+------
+
+
 Test Line: 1
 French Sentence: dans le monde reel COMMA_ il nSINGQUOTE_ y a rien de mal a cela PERIOD_
 Google Translate: in the real world COMMA_ there is nothing wrong with that PERIOD_
