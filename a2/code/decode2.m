@@ -35,11 +35,9 @@ if (nargin < 4)
 elseif nargin == 4
   lmtype = '';
   delta = 0;
-  vocabSize = length(fieldnames(LM.uni));
 end
 if (isempty(lmtype))
   delta = 0;
-  vocabSize = length(fieldnames(LM.uni));
 elseif strcmp(lmtype, 'smooth')
   if (nargin < 6)  
     disp( ['lm_prob: if you specify smoothing, you need all 5' ...
@@ -140,6 +138,7 @@ while (iter < MAXTRANS )
   end
 
   iter = iter + 1;
+  
 end
 
 
