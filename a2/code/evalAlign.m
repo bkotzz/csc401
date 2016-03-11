@@ -6,14 +6,14 @@ function evalAlign()
     %  Task 5. 
 
     % some of your definitions
-    trainDir     = '../data/Hansard/Training';
-    testDir      = '../data/Hansard/Testing';
-    fn_LME       = '../data/Hansard/lm_e_hansard';
-    fn_LMF       = '../data/Hansard/lm_f_hansard';
-    fn_testF     = '../data/Hansard/Testing/Task5.f';
-    fn_testgE    = '../data/Hansard/Testing/Task5.google.e';
-    fn_testE     = '../data/Hansard/Testing/Task5.e';
-    fn_log       = '../Task5.txt';
+    trainDir     = '/u/cs401/A2_SMT/data/Hansard/Training';
+    testDir      = '/u/cs401/A2_SMT/data/Hansard/Testing';
+    fn_LME       = '/u/cs401/A2_SMT/data/Hansard/lm_e_hansard';
+    fn_LMF       = '/u/cs401/A2_SMT/data/Hansard/lm_f_hansard';
+    fn_testF     = '/u/cs401/A2_SMT/data/Hansard/Testing/Task5.f';
+    fn_testgE    = '/u/cs401/A2_SMT/data/Hansard/Testing/Task5.google.e';
+    fn_testE     = '/u/cs401/A2_SMT/data/Hansard/Testing/Task5.e';
+    fn_log       = 'Task5.txt';
     lm_type      = '';
     delta        = 0;
     numSentences = 1000;
@@ -28,18 +28,18 @@ function evalAlign()
     fileID = fopen(fn_log, 'w');
 
     % Train your language models. This is task 2 which makes use of task 1
-    %LM = lm_train( trainDir, 'e', fn_LME );
+    LM = lm_train( trainDir, 'e', fn_LME );
     %LM = lm_train( trainDir, 'f', fn_LMF );
-    load(fn_LME, '-mat', 'LM');
+    %load(fn_LME, '-mat', 'LM');
     %load(fn_LMF, '-mat', 'LMF');
 
     vocabSize = length(fieldnames(LM.uni));
 
     % Train your alignment model of French, given English 
-    %AM = align_ibm1( trainDir, numSentences, maxIter, fn_AMFE);
     for i=[1, 10, 15, 30]
-        f = ['../data/Hansard/am_hansard_' num2str(i) 'k'];
-        load(f, '-mat', 'AM');
+        f = ['/u/cs401/A2_SMT/data/Hansard/am_hansard_' num2str(i) 'k'];
+        %load(f, '-mat', 'AM');
+        AM = align_ibm1( trainDir, i * 1000, maxIter, f);
         s_am.(['am' num2str(i)]) = AM;
     end
 
