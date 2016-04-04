@@ -59,7 +59,7 @@ function theta = train(X, max_iter, epsilon, M)
     theta.weights = zeros(1, M) + 1 / M;
     
     random_init_vec = ceil(rand(1, M) * T);
-    theta.means = X(random_init_vec, :).';
+    theta.means = X(random_init_vec, :)';
 
     theta.cov = zeros(D, D, M);
     for j=1:M
@@ -107,7 +107,7 @@ function L = computeLikelihood(X, theta, M)
     
     b = calculate_b(X, theta, M); % T x M
     
-    sum_w_b = b * theta.weights.'; % T x 1
+    sum_w_b = b * theta.weights'; % T x 1
     rep_w = repmat(theta.weights, T, 1); % T x M
     rep_sum_w_b = repmat(sum_w_b, 1, M); % T x M
     
@@ -128,14 +128,14 @@ function theta = updateParameters(theta, X, L, M)
     
     % Means    
     rep_sum_L = repmat(sum_L, D, 1); % D x M
-    sum_L_X = X.' * L; % D x M
+    sum_L_X = X' * L; % D x M
     theta.means = sum_L_X ./ rep_sum_L;
     
     % Variance
     mu_squared = theta.means .* theta.means; % D x M
     
     X_squared = X .* X; % T x D
-    sum_L_X_squared = X_squared.' * L; % D x M
+    sum_L_X_squared = X_squared' * L; % D x M
     
     E_X_squared = sum_L_X_squared ./ rep_sum_L; % D x M
     var = E_X_squared - mu_squared; % D x M

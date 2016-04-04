@@ -26,7 +26,7 @@ for i=1:num_utterances
         
         % Compute log likelihood with data and theta
         b = calculate_b(data, theta_j, M); % T x M
-        sum_w_b = b * theta.weights.'; % T x 1
+        sum_w_b = b * theta.weights'; % T x 1
         log_sum_w_b = log(sum_w_b); % T x 1
         p_x = sum(log_sum_w_b, 1); % 1 x 1
         
