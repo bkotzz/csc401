@@ -83,8 +83,10 @@ function theta = train(X, max_iter, epsilon, M)
     %   theta := UpdateParameters (theta, X, L) ; improvement := L - prev_L
         theta = updateParameters(theta, X, L, M);
         
+        % Summing across a normalized axis will only give 1...
         sum_L = sum(sum(L, 1), 2); % 1 x 1
         disp(sum_L)
+        disp(T)
         
         improvement = sum_L - prev_L;
         
@@ -103,25 +105,7 @@ function L = computeLikelihood(X, theta, M)
     T = X_size(1);
     D = X_size(2);
     
-    b = zeros(T, M);
-    
-    for m=1:M
-        % Compute b per dimension
-        
-        mu_m = theta.means(:, m); % D x 1
-        rep_mu_m = repmat(mu_m.', T, 1); % T x D
-        
-        cov_m = diag(theta.cov(:, :, m)); % D x 1
-        rep_cov_m = repmat(cov_m.', T, 1); % T x D
-        
-        b_m_per_d = normpdf(X, rep_mu_m, rep_cov_m); % T x D 
-
-        % Since we assume dimensional independence, take product across
-        % all dimensions to get b.
-        b_m = prod(b_m_per_d, 2); % T x 1
-
-        b(:, m) = b_m;
-    end
+    b = calculate_b(X, theta, M); % T x M
     
     sum_w_b = b * theta.weights.'; % T x 1
     rep_w = repmat(theta.weights, T, 1); % T x M
