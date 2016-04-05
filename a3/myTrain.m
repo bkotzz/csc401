@@ -1,10 +1,10 @@
 dir_train   = 'speechdata/Training';
-dir_test    = 'speechdata/Testing';
 M           = 8;
 Q           = 3;
 initType    = 'kmeans';
 max_iter    = 3;
-output_file = './hmm_';
+output_file = './hmm/';
+bnt_path    = './bnt';
 
 % 1. Load phoneme data
 
@@ -25,22 +25,21 @@ for i=1:N_speakers
     % For each utterance
     for j=1:N_utterances
         mfcc_file = utterances(j).name;
-        
-        split = strsplit(mfcc_file, '.');
+        split = strsplit('.', mfcc_file);
         split{2} = 'phn';
         phn_file = strjoin(split, '.');
-        
+
         % Load mfcc data
         mfcc_data = load([speaker_dir, filesep, mfcc_file]);
         mfcc_rows = size(mfcc_data, 1);
-        
+
         % Read phoneme data for this speaker's utterance
         phoneme_transcription = textread([speaker_dir, filesep, phn_file], '%s', 'delimiter', '\n');
         N_phonemes = length(phoneme_transcription);
         
         % For each phoneme in utterance
         for k=1:N_phonemes
-            phoneme_data  = strsplit(phoneme_transcription{k});
+            phoneme_data  = strsplit(' ', phoneme_transcription{k});
             
             % Manipulate indices such that
             % 0   - 256 maps to [1, 2]
@@ -54,6 +53,7 @@ for i=1:N_speakers
             if strcmp(phoneme, 'h#')
                 phoneme = 'sil';
             end
+            
             mfcc_slice = mfcc_data(phoneme_start:phoneme_end, :);
             
             % If we haven't seen this phoneme yet, create an empty
@@ -69,6 +69,8 @@ for i=1:N_speakers
         end
     end
 end
+
+addpath(genpath(bnt_path));
 
 % Init and train an HMM for each of the unique phonemes seen
 phonemes_seen = fields(phoneme_struct);
