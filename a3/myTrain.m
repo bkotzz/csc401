@@ -82,7 +82,7 @@ for i_phn=1:num_phonemes_seen
     HMM = initHMM(data, M, Q, initType);
     [HMM, LL] = trainHMM(HMM, data, max_iter);
     
-    save([output_file, filesep, curr_phn_name], 'HMM', '-mat');
+    save([output_file, filesep, 'hmm_', curr_phn_name], 'HMM', '-mat');
 end
 
 rmpath(genpath(bnt_path));
