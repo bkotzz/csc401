@@ -2,7 +2,7 @@ dir_train   = 'speechdata/Training';
 M           = 8;
 Q           = 3;
 initType    = 'kmeans';
-max_iter    = 3;
+max_iter    = 15;
 output_file = './hmm';
 bnt_path    = './bnt';
 
