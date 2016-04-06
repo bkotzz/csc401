@@ -1,5 +1,6 @@
 function ibmTextToSpeech(text, flac_file_path, voice)
 
+    text = regexprep(text, ' ', '\\ ');
     username = 'a018dde3-dd3c-4eb7-90e2-0c7b3c703712';
     password = 'KfXQBOas5kwE';
     url = 'https://stream.watsonplatform.net/text-to-speech/api/v1/synthesize?voice=';
@@ -8,7 +9,6 @@ function ibmTextToSpeech(text, flac_file_path, voice)
     data = ['--data {\"text\":\"' text '\"} '];
     
     curl = ['curl -u ' username ':' password ' -X POST ' header1 header2 data url voice ' -o ' flac_file_path];
-    disp(curl)
-    unix(curl); % 'env LD_LIBRARY_PATH='''''
+    [status, result] = unix(curl); % 'env LD_LIBRARY_PATH='''''
 end
 
