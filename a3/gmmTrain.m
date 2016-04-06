@@ -78,20 +78,17 @@ function theta = train(X, max_iter, epsilon, M)
         disp(i)
         
     %   L := ComputeLikelihood (X, theta)
-        L = computeLikelihood(X, theta, M);
+        [L, p_m_given_x] = computeLikelihood(X, theta, M);
         
     %   theta := UpdateParameters (theta, X, L) ; improvement := L - prev_L
-        theta = updateParameters(theta, X, L, M);
+        theta = updateParameters(theta, X, p_m_given_x, M);
         
-        % Summing across a normalized axis will only give 1...
-        sum_L = sum(sum(L, 1), 2); % 1 x 1
-        disp(sum_L)
-        disp(T)
+        disp(L)
         
-        improvement = sum_L - prev_L;
+        improvement = L - prev_L;
         
     %   prev L := L
-        prev_L = sum_L;
+        prev_L = L;
         
     %   i := i + 1 end
         i = i + 1;
@@ -99,47 +96,60 @@ function theta = train(X, max_iter, epsilon, M)
     end
 end
 
-function L = computeLikelihood(X, theta, M)
+function [L, p_m_given_x] = computeLikelihood(X, theta, M)
     % X: T x D
+    
     X_size = size(X);
     T = X_size(1);
     D = X_size(2);
     
+    % wb
     b = calculate_b(X, theta, M); % T x M
-    
-    sum_w_b = b * theta.weights'; % T x 1
     rep_w = repmat(theta.weights, T, 1); % T x M
+    w_b = rep_w .* b; % T x M
+    
+    % log(sum(wb))
+%     w_b_max = max(w_b, [], 2); % T x 1
+%     rep_w_b_max = repmat(w_b_max, 1, M); % T x M
+%     log_sum_w_b = log(sum(exp(w_b - rep_w_b_max), 2)) + w_b_max; % T x 1
+    
+    % sum(wb)
+    sum_w_b = b * theta.weights'; % T x 1
     rep_sum_w_b = repmat(sum_w_b, 1, M); % T x M
     
-    L = rep_w .* b ./ rep_sum_w_b; % T x M
+    % Likelihood = sum(log(sum(wb))
+    L = sum(log(sum_w_b), 1); % 1 x 1
+    
+    p_m_given_x = w_b ./ rep_sum_w_b; % T x M
 end
 
-function theta = updateParameters(theta, X, L, M)
+function theta = updateParameters(theta, X, p_m_given_x, M)
     % X: T x D
-    % L: T x M
+    % p_m_given_x: T x M
     
     X_size = size(X);
     T = X_size(1);
     D = X_size(2);
 
     % Weights
-    sum_L = sum(L, 1); % 1 x M
-    theta.weights = sum_L ./ T;
+    sum_p = sum(p_m_given_x, 1); % 1 x M
+    theta.weights = sum_p ./ T;
     
     % Means    
-    rep_sum_L = repmat(sum_L, D, 1); % D x M
-    sum_L_X = X' * L; % D x M
-    theta.means = sum_L_X ./ rep_sum_L;
+    rep_sum_p = repmat(sum_p, D, 1); % D x M
+    sum_p_X = X' * p_m_given_x; % D x M
+    theta.means = sum_p_X ./ rep_sum_p;
     
     % Variance
     mu_squared = theta.means .* theta.means; % D x M
     
     X_squared = X .* X; % T x D
-    sum_L_X_squared = X_squared' * L; % D x M
+    sum_p_X_squared = X_squared' * p_m_given_x; % D x M
     
-    E_X_squared = sum_L_X_squared ./ rep_sum_L; % D x M
+    E_X_squared = sum_p_X_squared ./ rep_sum_p; % D x M
     var = E_X_squared - mu_squared; % D x M
     assert(0 == any(any(var < 0)))
+
     for m=1:M
         theta.cov(:, :, m) = diag(var(:, m));
     end
