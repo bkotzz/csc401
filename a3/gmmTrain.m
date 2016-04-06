@@ -71,19 +71,16 @@ function theta = train(X, max_iter, epsilon, M)
     
     % prev L := -Inf ; improvement = -Inf
     prev_L = -Inf;
-    improvement = -Inf;
+    improvement = epsilon;
     
     % while i =< MAX ITER and improvement >= epsilon do
-    while i < max_iter %&& improvement >= epsilon
-        disp(i)
+    while i < max_iter && improvement >= epsilon
         
     %   L := ComputeLikelihood (X, theta)
         [L, p_m_given_x] = computeLikelihood(X, theta, M);
         
     %   theta := UpdateParameters (theta, X, L) ; improvement := L - prev_L
         theta = updateParameters(theta, X, p_m_given_x, M);
-        
-        disp(L)
         
         improvement = L - prev_L;
         
@@ -94,6 +91,8 @@ function theta = train(X, max_iter, epsilon, M)
         i = i + 1;
     % end
     end
+    
+    disp(i)
 end
 
 function [L, p_m_given_x] = computeLikelihood(X, theta, M)
