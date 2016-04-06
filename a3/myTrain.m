@@ -3,7 +3,7 @@ M           = 8;
 Q           = 3;
 initType    = 'kmeans';
 max_iter    = 3;
-output_file = './hmm/';
+output_file = './hmm';
 bnt_path    = './bnt';
 
 % 1. Load phoneme data
@@ -25,7 +25,7 @@ for i=1:N_speakers
     % For each utterance
     for j=1:N_utterances
         mfcc_file = utterances(j).name;
-        split = strsplit('.', mfcc_file);
+        split = strsplit(mfcc_file, '.');
         split{2} = 'phn';
         phn_file = strjoin(split, '.');
 
@@ -39,7 +39,7 @@ for i=1:N_speakers
         
         % For each phoneme in utterance
         for k=1:N_phonemes
-            phoneme_data  = strsplit(' ', phoneme_transcription{k});
+            phoneme_data  = strsplit(phoneme_transcription{k}, ' ');
             
             % Manipulate indices such that
             % 0   - 256 maps to [1, 2]
@@ -82,5 +82,7 @@ for i_phn=1:num_phonemes_seen
     HMM = initHMM(data, M, Q, initType);
     [HMM, LL] = trainHMM(HMM, data, max_iter);
     
-    save([output_file, curr_phn_name], 'HMM', '-mat');
+    save([output_file, filesep, curr_phn_name], 'HMM', '-mat');
 end
+
+rmpath(genpath(bnt_path));
