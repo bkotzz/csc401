@@ -1,0 +1,210 @@
+Test Utterance: 1
+Reference: now here is truly a marvel
+Part 4.1 Hypothesis: now here is truly a marvel
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: now here is truly of marvel
+Part 4.2 WER: 16.666667% (Male)
+
+Test Utterance: 2
+Reference: the cartoon features a muskrat and a tadpole
+Part 4.1 Hypothesis: captain features a muskrat and a tadpole
+Part 4.1 WER: 25.000000%
+Part 4.2 Hypothesis: the cartoon features of muskrat and a tadpole
+Part 4.2 WER: 12.500000% (Male)
+
+Test Utterance: 3
+Reference: just let me die in peace
+Part 4.1 Hypothesis: just let me die in peace
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: just let me die in peace
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 4
+Reference: the sculptor looked at him bugeyed and amazed angry
+Part 4.1 Hypothesis: the sculptor looked at him bug eyed and amazed angry
+Part 4.1 WER: 22.222222%
+Part 4.2 Hypothesis: the sculptor looked at mp jeep and amazed angry
+Part 4.2 WER: 22.222222% (Female)
+
+Test Utterance: 5
+Reference: a flash illumined the trees as a crooked bolt twigged in several directions
+Part 4.1 Hypothesis: flash live in the trees as a cricket ball twig in several directions
+Part 4.1 WER: 46.153846%
+Part 4.2 Hypothesis: a flash illumined the trees is a cricket ball twig in several directions
+Part 4.2 WER: 30.769231% (Female)
+
+Test Utterance: 6
+Reference: this is particularly true in site selection
+Part 4.1 Hypothesis: this is particularly true in site selection
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: this is particularly true in site selection
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 7
+Reference: we would lose our export markets and deny ourselves the imports we need
+Part 4.1 Hypothesis: we would lose our export markets and deny ourselves imports we need
+Part 4.1 WER: 7.692308%
+Part 4.2 Hypothesis: we would lose our export markets and deny ourselves the imports we need
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 8
+Reference: count the number of teaspoons of soysauce that you add
+Part 4.1 Hypothesis: continental have teaspoons of soy sauce that you add
+Part 4.1 WER: 60.000000%
+Part 4.2 Hypothesis: count the number of teaspoons of soy sauce that you add
+Part 4.2 WER: 20.000000% (Male)
+
+Test Utterance: 9
+Reference: finally he asked do you object to petting
+Part 4.1 Hypothesis: finally he asked do you object to petting
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: finally he asked do you object to petting
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 10
+Reference: draw every outer line first then fill in the interior
+Part 4.1 Hypothesis: try every other line first then fill in the interior
+Part 4.1 WER: 20.000000%
+Part 4.2 Hypothesis: draw every other line first then fill in the interior
+Part 4.2 WER: 10.000000% (Male)
+
+Test Utterance: 11
+Reference: change involves the displacement of form
+Part 4.1 Hypothesis: change involves the displacement of femme
+Part 4.1 WER: 16.666667%
+Part 4.2 Hypothesis: change involves the displacement of forum
+Part 4.2 WER: 16.666667% (Female)
+
+Test Utterance: 12
+Reference: to his puzzlement there suddenly was no haze
+Part 4.1 Hypothesis: to his puzzlement there suddenly was no hayes
+Part 4.1 WER: 12.500000%
+Part 4.2 Hypothesis: to his puzzlement there suddenly was no hayes
+Part 4.2 WER: 12.500000% (Female)
+
+Test Utterance: 13
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: dont ask me to carry read like that
+Part 4.1 WER: 40.000000%
+Part 4.2 Hypothesis: dante asked me to carry an oily rag like that
+Part 4.2 WER: 20.000000% (Female)
+
+Test Utterance: 14
+Reference: the full moon shone brightly that night
+Part 4.1 Hypothesis: full moon shone brightly that night
+Part 4.1 WER: 28.571429%
+Part 4.2 Hypothesis: the full moon shone brightly that night
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 15
+Reference: tugboats are capable of hauling huge loads
+Part 4.1 Hypothesis: tug boats a capable of hauling huge loads
+Part 4.1 WER: 42.857143%
+Part 4.2 Hypothesis: tug boats are capable of hauling huge loads
+Part 4.2 WER: 28.571429% (Male)
+
+Test Utterance: 16
+Reference: did dad do academic bidding
+Part 4.1 Hypothesis: did dad do academic betting
+Part 4.1 WER: 20.000000%
+Part 4.2 Hypothesis: did dad do academic bidding
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 17
+Reference: she had your dark suit in greasy wash water all year
+Part 4.1 Hypothesis: she had your dark suit increase you wash water all year
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: she had your dark suit in greasy wash water all year
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 18
+Reference: the thick elm forest was nearly overwhelmed by dutch elm disease
+Part 4.1 Hypothesis: the thick el virus was nearly overwhelmed by dutch elm disease
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: the thick around forest was nearly overwhelmed by dutch elm disease
+Part 4.2 WER: 9.090909% (Female)
+
+Test Utterance: 19
+Reference: count the number of teaspoons of soysauce that you add
+Part 4.1 Hypothesis: cop number of teaspoons of soy sauce that you had
+Part 4.1 WER: 50.000000%
+Part 4.2 Hypothesis: count the number of teaspoons of soy sauce that you add
+Part 4.2 WER: 20.000000% (Male)
+
+Test Utterance: 20
+Reference: norwegian sweaters are made of lambs wool
+Part 4.1 Hypothesis: waging sweaters are made of lambs will
+Part 4.1 WER: 42.857143%
+Part 4.2 Hypothesis: norwegian sweaters are made of lambs will
+Part 4.2 WER: 28.571429% (Male)
+
+Test Utterance: 21
+Reference: we think differently
+Part 4.1 Hypothesis: we think differently
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: we think differently
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 22
+Reference: a toothpaste tube should be squeezed from the bottom
+Part 4.1 Hypothesis: a toothpaste tube should be squeezed from the bottom
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: a toothpaste tube should be squeezed from the bottom
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 23
+Reference: ran away on a black night with a lawful wedded man
+Part 4.1 Hypothesis: ran away a black knight with a lawful wedded man
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: ran away on a black knight with a lawful wedded man
+Part 4.2 WER: 9.090909% (Female)
+
+Test Utterance: 24
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.1 WER: 10.000000%
+Part 4.2 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.2 WER: 10.000000% (Male)
+
+Test Utterance: 25
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: town asked me to carry an oily rag like that
+Part 4.1 WER: 20.000000%
+Part 4.2 Hypothesis: dante asked me to carry an oily rag like that
+Part 4.2 WER: 20.000000% (Female)
+
+Test Utterance: 26
+Reference: index words and electronic switches may be reserved in the following ways
+Part 4.1 Hypothesis: index words and electronic switches may be reserved in the following ways
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: index words and electronic switches may be reserved in the following ways
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 27
+Reference: the avalanche triggered a minor earthquake
+Part 4.1 Hypothesis: yeah avalanche triggered a minor earthquake
+Part 4.1 WER: 16.666667%
+Part 4.2 Hypothesis: the avalanche triggered a minor earthquake
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 28
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.1 WER: 10.000000%
+Part 4.2 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.2 WER: 10.000000% (Male)
+
+Test Utterance: 29
+Reference: the thick elm forest was nearly overwhelmed by dutch elm disease
+Part 4.1 Hypothesis: the thick and forrest was nearly overwhelmed by dutch elm disease
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: the thick elm forest was nearly overwhelmed by dutch elm disease
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 30
+Reference: when all else fails use force
+Part 4.1 Hypothesis: when all else fails use force
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: when all else fails use force
+Part 4.2 WER: 0.000000% (Male)
+
