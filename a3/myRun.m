@@ -1,8 +1,8 @@
 dir_test    = 'speechdata/Testing';
-dir_hmm     = './hmm';
+dir_hmm     = './hmm/m8q3iter15';
 bnt_path    = './bnt';
 
-warning('off', 'MATLAB:dispatcher:nameConflict');
+%warning('off', 'MATLAB:dispatcher:nameConflict');
 
 utterances = dir([dir_test, filesep, '*.phn']);
 N_utterances = length(utterances);

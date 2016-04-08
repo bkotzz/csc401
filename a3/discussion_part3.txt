@@ -1,0 +1,11 @@
+Part 3.1: Proportion of correct identifications of phoneme sequences in test data
+
+
+Part 3.2: Experiments
+
+M = Number of mixtures per state
+Q = number of states per sequence
+S = number of speakers used in training (amount of training data used)
+D = Number of dimensions used (first D of 14)
+
+
