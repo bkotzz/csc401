@@ -1,0 +1,248 @@
+Reference: Now here is truly a marvel.
+Hypothesis: Now here is truly hey marvel.
+SE: 0.125000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.125000
+
+Reference: The cartoon features a muskrat and a tadpole.
+Hypothesis: Cat tune features a muskrat and a tadpole.
+SE: 0.200000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.200000
+
+Reference: Just let me die in peace.
+Hypothesis: Just let me die in peace.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: The sculptor looked at him, bugeyed and amazed, angry.
+Hypothesis: The sculptor looked at him, bug I'd and amazed, angry.
+SE: 0.090909
+IE: 0.090909
+DE: 0.000000
+
+Total: 0.181818
+
+Reference: A flash illumined the trees as a crooked bolt twigged in several directions.
+Hypothesis: A flash illuminated the trees as crook bolt tweaked several directions.
+SE: 0.200000
+IE: 0.000000
+DE: 0.133333
+
+Total: 0.333333
+
+Reference: This is particularly true in site selection.
+Hypothesis: This is particularly true sight selection.
+SE: 0.111111
+IE: 0.000000
+DE: 0.111111
+
+Total: 0.222222
+
+Reference: We would lose our export markets and deny ourselves the imports we need.
+Hypothesis: We would lose sour expert markets deny ourselves the imports we need.
+SE: 0.133333
+IE: 0.000000
+DE: 0.066667
+
+Total: 0.200000
+
+Reference: Count the number of teaspoons of soysauce that you add.
+Hypothesis: Compton number of teaspoons of so he sauce that you add.
+SE: 0.166667
+IE: 0.166667
+DE: 0.083333
+
+Total: 0.416667
+
+Reference: Finally he asked, do you object to petting?
+Hypothesis: Finally he asked, do you object to petting?
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: Draw every outer line first, then fill in the interior.
+Hypothesis: Draw every other line first, then fill into interior.
+SE: 0.166667
+IE: 0.000000
+DE: 0.083333
+
+Total: 0.250000
+
+Reference: Change involves the displacement of form.
+Hypothesis: Change involves the displacement of fawn.
+SE: 0.125000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.125000
+
+Reference: To his puzzlement, there suddenly was no haze.
+Hypothesis: Two is puzzle mint, there suddenly was no haze.
+SE: 0.300000
+IE: 0.100000
+DE: 0.000000
+
+Total: 0.400000
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Donna's me to carry oily rag like that.
+SE: 0.083333
+IE: 0.000000
+DE: 0.166667
+
+Total: 0.250000
+
+Reference: The full moon shone brightly that night.
+Hypothesis: The the full moon shone brightly that night.
+SE: 0.000000
+IE: 0.111111
+DE: 0.000000
+
+Total: 0.111111
+
+Reference: Tugboats are capable of hauling huge loads.
+Hypothesis: Tugboats are capable falling huge loads.
+SE: 0.111111
+IE: 0.000000
+DE: 0.111111
+
+Total: 0.222222
+
+Reference: Did dad do academic bidding?
+Hypothesis: Did tatoo academic bidding?
+SE: 0.142857
+IE: 0.000000
+DE: 0.142857
+
+Total: 0.285714
+
+Reference: She had your dark suit in greasy wash water all year.
+Hypothesis: See add your dark suit and greasy wash water all year.
+SE: 0.230769
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.230769
+
+Reference: The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Hypothesis: The thick forest was nearly over helmed by Dutch Elm Disease.
+SE: 0.076923
+IE: 0.076923
+DE: 0.076923
+
+Total: 0.230769
+
+Reference: Count the number of teaspoons of soysauce that you add.
+Hypothesis: Cow ten number of teaspoons of soysauce that you add.
+SE: 0.166667
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.166667
+
+Reference: Norwegian sweaters are made of lamb's wool.
+Hypothesis: Norwegian sweaters are made of lamb's wool.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: We think differently.
+Hypothesis: We think differently.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: A toothpaste tube should be squeezed from the bottom.
+Hypothesis: A too pays too should be squeezed from the bottom.
+SE: 0.181818
+IE: 0.090909
+DE: 0.000000
+
+Total: 0.272727
+
+Reference: Ran away on a black night with a lawful wedded man.
+Hypothesis: Ran away on a black night with an awful wedded man.
+SE: 0.153846
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.153846
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Down ask me to carry an oily rag like that.
+SE: 0.083333
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.083333
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Don't ask me to carry an oily rag like that.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: Index words and electronic switches may be reserved in the following ways.
+Hypothesis: Index words an electronic switches may be reserved in the following way.
+SE: 0.142857
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.142857
+
+Reference: The avalanche triggered a minor earthquake.
+Hypothesis: The avalanche triggered minor earth way.
+SE: 0.125000
+IE: 0.125000
+DE: 0.125000
+
+Total: 0.375000
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Donna's me to carry an oily rag like that.
+SE: 0.083333
+IE: 0.000000
+DE: 0.083333
+
+Total: 0.166667
+
+Reference: The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Hypothesis: The thick elm for his was nail he over well bye touch Elm Disease.
+SE: 0.384615
+IE: 0.230769
+DE: 0.000000
+
+Total: 0.615385
+
+Reference: When all else fails, use force.
+Hypothesis: When hall else fails, use forks.
+SE: 0.250000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.250000
+
+----
+
+Entire SE: 0.134375
+Entire IE: 0.034375
+Entire DE: 0.040625
+
+Entire Total: 0.209375
+
