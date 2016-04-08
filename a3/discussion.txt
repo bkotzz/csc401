@@ -1,3 +1,28 @@
+Part 4
+
+In general, part 4.2 seems to be more accurate, which makes sense considering it starts with the correct
+answer, and since the IBM Watson products are usually sophisticated enough that they have a low error rate
+in each direction of the text->speech->text conversion. Watson seems to be able to recognize its own synthesized
+speech better than our training set, as it is probably trained extensively on the small number of voices
+it offers. You can see this in utterance 2, where Watson can recognize cartoon from its own synthesized speech,
+but misinterprets it from ours. This could also be because the training set we use has speakers with more unusual
+accents, compared with the Michael and Lisa voices with are pretty standard.
+
+Looking at utterance 7, we get more deletion errors in Part 4.1 then 4.2, as short words like 'the' may be
+spoken very quickly by a natural speaker, but are likely enunciated more clearly in the synthesized speech.
+In utterance 13, there are two deletion errors in Part 4.1, making me think that the Watson Speech to Text
+service may just ignore words when it can't make a reasonable guess.
+
+Another interesting case is utterance 25, where both hypotheses mess up 'dont', even though both were correct
+for the same reference text in utterance 24. This shows two problems. One is that the TTS engine struggles with
+contractions when the apostrophe is removed. It also shows that the interpretation by Watson of certain words
+depends heavily on the voice used, as it could recognizeit from a Male voice, but not a Female.
+
+Another issue occurs in utterane 15, where the difference between tug boat and tugboat gets marked as an error,
+although it is ambiguous which one is actually correct, and using a more sophisticated error may help reduce false
+positive error counts like these. 
+
+
 Test Utterance: 1
 Reference: now here is truly a marvel
 Part 4.1 Hypothesis: now here is truly a marvel
