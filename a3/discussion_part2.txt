@@ -1,25 +1,29 @@
 Default values are M = 8, 50 iterations, epsilon = 0.5, with all 30 speakers 
 
+
 1. Trying different values for M
 
-Accuracy with M = 8 is 100.000000
-Accuracy with M = 6 is 100.000000
 Accuracy with M = 4 is 100.000000
+Accuracy with M = 3 is 80.000000
 Accuracy with M = 2 is 86.666667
+Accuracy with M = 1 is 93.333333
+
 2. Trying different values for epsilon
 
 Accuracy with epsilon = 1 is 100.000000
-Accuracy with epsilon = 11 is 100.000000
-Accuracy with epsilon = 21 is 100.000000
-Accuracy with epsilon = 31 is 100.000000
-Accuracy with epsilon = 41 is 100.000000
+Accuracy with epsilon = 201 is 100.000000
+Accuracy with epsilon = 401 is 93.333333
+Accuracy with epsilon = 601 is 100.000000
+Accuracy with epsilon = 801 is 93.333333
+
 3. Trying different values for max_iter
 
-Accuracy with max_iter = 10 is 100.000000
-Accuracy with max_iter = 20 is 100.000000
-Accuracy with max_iter = 30 is 100.000000
-Accuracy with max_iter = 40 is 100.000000
-Accuracy with max_iter = 50 is 100.000000
+Accuracy with max_iter = 1 is 100.000000
+Accuracy with max_iter = 3 is 93.333333
+Accuracy with max_iter = 5 is 100.000000
+Accuracy with max_iter = 7 is 100.000000
+Accuracy with max_iter = 9 is 100.000000
+
 4. Trying different values for the number of speakers
 
 Accuracy with num_speakers = 5 is 20.000000

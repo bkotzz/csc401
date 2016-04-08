@@ -19,14 +19,14 @@ for i=4:-1:1
 end
 
 fprintf(output_file, '\n2. Trying different values for epsilon\n\n');
-for i=1:200:1000
+for i=1:400:2000
     gmm_dir = [dir_save_gmm, '_e', num2str(i)];
     acc = f_gmmClassify(gmm_dir, dir_train, dir_test, lik_dir, max_iter, i, M, Inf);
     fprintf(output_file, 'Accuracy with epsilon = %d is %f\n', i, acc);
 end
 
 fprintf(output_file, '\n3. Trying different values for max_iter\n\n');
-for i=1:4:20
+for i=1:5
     gmm_dir = [dir_save_gmm, '_i', num2str(i)];
     acc = f_gmmClassify(gmm_dir, dir_train, dir_test, lik_dir, i, epsilon, M, Inf);
     fprintf(output_file, 'Accuracy with max_iter = %d is %f\n', i, acc);
