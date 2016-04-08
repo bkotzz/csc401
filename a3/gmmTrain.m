@@ -92,7 +92,6 @@ function theta = train(X, max_iter, epsilon, M)
     % end
     end
     
-    disp(i)
 end
 
 function [L, p_m_given_x] = computeLikelihood(X, theta, M)
