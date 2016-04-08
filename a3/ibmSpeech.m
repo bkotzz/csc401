@@ -2,6 +2,8 @@ test_dir = 'speechdata/Testing';
 dir_save_gmm   = './trained_gmms';
 num_test_points = 30;
 stored_flac_files = './flac';
+output_file_name = 'discussion.txt';
+M = 8;
 
 try
     load(dir_save_gmm, 'gmms', '-mat');
@@ -10,6 +12,9 @@ catch
     gmms = gmmTrain(dir_train, max_iter, epsilon, M);
     save(dir_save_gmm, 'gmms', '-mat');
 end
+num_speakers = length(gmms);
+
+output_file = fopen(output_file_name, 'w');
 
 % Part 1: Convert test audio files to text with Watson, and calculate 
 % accuracy against reference
@@ -18,7 +23,7 @@ end
 % text with Watson, then calculate accuracy against reference
 
 for i=1:num_test_points
-    disp(i)
+    fprintf(output_file, 'Test Utterance: %d\n', i);
     
     % Reference
     txt_file_name = [test_dir, filesep, 'unkn_', int2str(i), '.txt'];
@@ -31,6 +36,7 @@ for i=1:num_test_points
     ref_array = strsplit(reference, ' ');
     ref_array = ref_array(3:end); % remove first two numbers
     reference = strjoin(ref_array, ' ');
+    reference = regexprep(reference, '''', ''); % Remove ' after calling TTS
     ref_length = length(ref_array);
     
     %%%% PART 1 %%%%
@@ -39,10 +45,11 @@ for i=1:num_test_points
 
     % Transcript
     hypothesis1 = ibmSpeechToText(flac_file);
+    hypothesis1 = regexprep(hypothesis1, '''', '');
     hyp_array1 = strsplit(hypothesis1, ' '); 
     
     [se, ie, de] = compute_levenshtein(hyp_array1, ref_array);
-    dist1 = (se + ie + de) / ref_length;
+    dist1 = (se + ie + de) / ref_length * 100;
     
     %%%% PART 2 %%%%
     
@@ -75,25 +82,29 @@ for i=1:num_test_points
     if ('M' == max_likelihood_name(1))
         % Male
         voice = 'en-US_MichaelVoice';
+        gender = 'Male';
     else
         % Female
         voice = 'en-US_LisaVoice';
+        gender = 'Female';
     end
 
     watson_flac_file = [stored_flac_files, filesep, int2str(i), '.flac'];
     ibmTextToSpeech(reference, watson_flac_file, voice);
     
     hypothesis2 = ibmSpeechToText(watson_flac_file);
-    hyp_array2 = strsplit(hypothesis1, ' '); 
+    hypothesis2 = regexprep(hypothesis2, '''', '');
+    hyp_array2 = strsplit(hypothesis2, ' '); 
     
     [se, ie, de] = compute_levenshtein(hyp_array2, ref_array);
-    dist2 = (se + ie + de) / ref_length;
+    dist2 = (se + ie + de) / ref_length * 100;
    
-    disp(reference)
-    disp(hypothesis1)
-    disp(dist1)
-    disp(hypothesis2)
-    disp(dist2)
+    fprintf(output_file, 'Reference: %s\n', reference);
+    fprintf(output_file, 'Part 4.1 Hypothesis: %s\n', hypothesis1);
+    fprintf(output_file, 'Part 4.1 WER: %f%%\n', dist1);
+    fprintf(output_file, 'Part 4.2 Hypothesis: %s\n', hypothesis2);
+    fprintf(output_file, 'Part 4.2 WER: %f%% (%s)\n\n', dist2, gender);
 end
 
+fclose(output_file);
 
