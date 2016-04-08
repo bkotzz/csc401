@@ -66,3 +66,7 @@ target/
 
 .DS_Store
 *.m~
+
+WEKA/
+train_all.arff
+train_all.twt
