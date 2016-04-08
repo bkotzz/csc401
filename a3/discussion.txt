@@ -85,7 +85,7 @@ Part 4.2 WER: 12.500000% (Female)
 Test Utterance: 13
 Reference: dont ask me to carry an oily rag like that
 Part 4.1 Hypothesis: dont ask me to carry read like that
-Part 4.1 WER: 40.000000%
+Part 4.1 WER: 30.000000%
 Part 4.2 Hypothesis: dante asked me to carry an oily rag like that
 Part 4.2 WER: 20.000000% (Female)
 
@@ -134,9 +134,9 @@ Part 4.2 WER: 20.000000% (Male)
 Test Utterance: 20
 Reference: norwegian sweaters are made of lambs wool
 Part 4.1 Hypothesis: waging sweaters are made of lambs will
-Part 4.1 WER: 42.857143%
+Part 4.1 WER: 28.571429%
 Part 4.2 Hypothesis: norwegian sweaters are made of lambs will
-Part 4.2 WER: 28.571429% (Male)
+Part 4.2 WER: 14.285714% (Male)
 
 Test Utterance: 21
 Reference: we think differently
@@ -162,9 +162,9 @@ Part 4.2 WER: 9.090909% (Female)
 Test Utterance: 24
 Reference: dont ask me to carry an oily rag like that
 Part 4.1 Hypothesis: dont ask me to carry an oily rag like that
-Part 4.1 WER: 10.000000%
+Part 4.1 WER: 0.000000%
 Part 4.2 Hypothesis: dont ask me to carry an oily rag like that
-Part 4.2 WER: 10.000000% (Male)
+Part 4.2 WER: 0.000000% (Male)
 
 Test Utterance: 25
 Reference: dont ask me to carry an oily rag like that
@@ -190,9 +190,9 @@ Part 4.2 WER: 0.000000% (Female)
 Test Utterance: 28
 Reference: dont ask me to carry an oily rag like that
 Part 4.1 Hypothesis: dont ask me to carry an oily rag like that
-Part 4.1 WER: 10.000000%
+Part 4.1 WER: 0.000000%
 Part 4.2 Hypothesis: dont ask me to carry an oily rag like that
-Part 4.2 WER: 10.000000% (Male)
+Part 4.2 WER: 0.000000% (Male)
 
 Test Utterance: 29
 Reference: the thick elm forest was nearly overwhelmed by dutch elm disease

@@ -31,12 +31,11 @@ for i=1:num_test_points
     assert(1 == length(txt_file))
     
     reference = lower(txt_file{1});
-    reference = regexprep(reference, '[^a-zA-Z0-9'' ]', '');
+    reference = regexprep(reference, '[^a-zA-Z0-9 ]', '');
     reference = regexprep(reference, '-', ' ');
     ref_array = strsplit(reference, ' ');
     ref_array = ref_array(3:end); % remove first two numbers
     reference = strjoin(ref_array, ' ');
-    reference = regexprep(reference, '''', ''); % Remove ' after calling TTS
     ref_length = length(ref_array);
     
     %%%% PART 1 %%%%
