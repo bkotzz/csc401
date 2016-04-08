@@ -8,26 +8,81 @@ Accuracy with M = 3 is 80.000000
 Accuracy with M = 2 is 86.666667
 Accuracy with M = 1 is 93.333333
 
+As the number of components decreases, so does the classification accuracy. But,
+it doesn't strictly decrease, as the accuracy of the model does depend on the random
+initialization of the gaussian means, so there is some variation in this trend. 
+This is because the loss function we are minimizing is non-convex, and can get 
+stuck (and converge) in local minimums, depending on the initialization. 
+
 2. Trying different values for epsilon
 
+As epsilon increases, there are more GMMs that finish training without fully
+converging, and therefor the accuracy does slightly go down.
+
 Accuracy with epsilon = 1 is 100.000000
-Accuracy with epsilon = 201 is 100.000000
 Accuracy with epsilon = 401 is 93.333333
-Accuracy with epsilon = 601 is 100.000000
 Accuracy with epsilon = 801 is 93.333333
+Accuracy with epsilon = 1201 is 93.333333
+Accuracy with epsilon = 1601 is 93.333333
 
 3. Trying different values for max_iter
 
+These results show that the number of iterations here doesn't actually have
+much effect, as it is possible for all/most of the models to converge with
+just one update. There is some variation seen here though, with the random
+initialization of the mean vectors. Some bad initializations may need a few
+more updates to converge.
+
 Accuracy with max_iter = 1 is 100.000000
+Accuracy with max_iter = 2 is 86.666667
 Accuracy with max_iter = 3 is 93.333333
+Accuracy with max_iter = 4 is 100.000000
 Accuracy with max_iter = 5 is 100.000000
-Accuracy with max_iter = 7 is 100.000000
-Accuracy with max_iter = 9 is 100.000000
 
 4. Trying different values for the number of speakers
+
+The accuracy goes up as we include the GMMs from more of the speakers,
+because if the GMM from the correct speaker isn't included when classifying,
+then we are guaranteed to get that classification wrong. As we have seen, 
+the model can generally get 100% accuracy, so the accuracy with a reduced 
+number of speakers is generally just the number of speakers from the test
+set that are included in the set of GMMs that we use to classify.
 
 Accuracy with num_speakers = 5 is 20.000000
 Accuracy with num_speakers = 10 is 33.333333
 Accuracy with num_speakers = 15 is 40.000000
 Accuracy with num_speakers = 20 is 60.000000
 Accuracy with num_speakers = 25 is 73.333333
+
+Question 1.
+
+One way to improve the classification accuracy using gaussian mixtures is to relax the assumption
+that the dimensions of the data are independent. This would involve using a full covariance matrix,
+rather than a diagonal one, with the ability to model dependencies between data dimensions. This may
+help in this application, because there is likely some correlation between the cepstral coeffecients.
+
+Another option would be to use a K-means initialization for the gaussians, to help avoid converging to
+local maxima.
+
+Question 2.
+
+One method may be to look at the likelihood of the data point under each GMM, and if all are below some threshold,
+we can assume that this test utterance is not from any of the trained speakers. Another method may be to look
+at the likelihood under each GMM, and if variance of the likelihoods is small, either the data point is very
+different from all models, meaning it is not from the trained speakers, or is very likely to come from all models,
+which is improbable, since the models of the trained speakers are all different. 
+
+Another method may be to merge the gaussians across all speaker models, and compute the likelihood of the data point
+being generated from any of the gaussians in any of the models, with a likelihood above some threshold.
+
+Another method may be to focus on the cepstral coefficients that model the vocal tract, as this is something that
+can not be changed for a given speaker. If these cepstral coefficients are dissimilar from the ones in all the cluster
+centers, then the speaker's vocal tract doesn't match any of the ones from the training set.
+
+Question 3.
+
+Another method of doing speaker identification could be to use a neural network. The inputs could be the cepstral
+coefficients, and the labels could be the one hot encoding of the speaker. You could use a hidden layer(s) with
+non-linear sigmoid functions, as universal function approximators. You could also train on other features, such
+as the pitch, or formants.
+
