@@ -1,0 +1,593 @@
+----------Part 2
+
+Default values are M = 8, 50 iterations, epsilon = 0.5, with all 30 speakers 
+
+
+1. Trying different values for M
+
+Accuracy with M = 4 is 100.000000
+Accuracy with M = 3 is 80.000000
+Accuracy with M = 2 is 86.666667
+Accuracy with M = 1 is 93.333333
+
+As the number of components decreases, so does the classification accuracy. But,
+it doesn't strictly decrease, as the accuracy of the model does depend on the random
+initialization of the gaussian means, so there is some variation in this trend. 
+This is because the loss function we are minimizing is non-convex, and can get 
+stuck (and converge) in local minimums, depending on the initialization. 
+
+2. Trying different values for epsilon
+
+As epsilon increases, there are more GMMs that finish training without fully
+converging, and therefor the accuracy does slightly go down.
+
+Accuracy with epsilon = 1 is 100.000000
+Accuracy with epsilon = 401 is 93.333333
+Accuracy with epsilon = 801 is 93.333333
+Accuracy with epsilon = 1201 is 93.333333
+Accuracy with epsilon = 1601 is 93.333333
+
+3. Trying different values for max_iter
+
+These results show that the number of iterations here doesn't actually have
+much effect, as it is possible for all/most of the models to converge with
+just one update. There is some variation seen here though, with the random
+initialization of the mean vectors. Some bad initializations may need a few
+more updates to converge.
+
+Accuracy with max_iter = 1 is 100.000000
+Accuracy with max_iter = 2 is 86.666667
+Accuracy with max_iter = 3 is 93.333333
+Accuracy with max_iter = 4 is 100.000000
+Accuracy with max_iter = 5 is 100.000000
+
+4. Trying different values for the number of speakers
+
+The accuracy goes up as we include the GMMs from more of the speakers,
+because if the GMM from the correct speaker isn't included when classifying,
+then we are guaranteed to get that classification wrong. As we have seen, 
+the model can generally get 100% accuracy, so the accuracy with a reduced 
+number of speakers is generally just the number of speakers from the test
+set that are included in the set of GMMs that we use to classify.
+
+Accuracy with num_speakers = 5 is 20.000000
+Accuracy with num_speakers = 10 is 33.333333
+Accuracy with num_speakers = 15 is 40.000000
+Accuracy with num_speakers = 20 is 60.000000
+Accuracy with num_speakers = 25 is 73.333333
+
+Question 1.
+
+One way to improve the classification accuracy using gaussian mixtures is to relax the assumption
+that the dimensions of the data are independent. This would involve using a full covariance matrix,
+rather than a diagonal one, with the ability to model dependencies between data dimensions. This may
+help in this application, because there is likely some correlation between the cepstral coeffecients.
+
+Another option would be to use a K-means initialization for the gaussians, to help avoid converging to
+local maxima.
+
+Question 2.
+
+One method may be to look at the likelihood of the data point under each GMM, and if all are below some threshold,
+we can assume that this test utterance is not from any of the trained speakers. Another method may be to look
+at the likelihood under each GMM, and if variance of the likelihoods is small, either the data point is very
+different from all models, meaning it is not from the trained speakers, or is very likely to come from all models,
+which is improbable, since the models of the trained speakers are all different. 
+
+Another method may be to merge the gaussians across all speaker models, and compute the likelihood of the data point
+being generated from any of the gaussians in any of the models, with a likelihood above some threshold.
+
+Another method may be to focus on the cepstral coefficients that model the vocal tract, as this is something that
+can not be changed for a given speaker. If these cepstral coefficients are dissimilar from the ones in all the cluster
+centers, then the speaker's vocal tract doesn't match any of the ones from the training set.
+
+Question 3.
+
+Another method of doing speaker identification could be to use a neural network. The inputs could be the cepstral
+coefficients, and the labels could be the one hot encoding of the speaker. You could use a hidden layer(s) with
+non-linear sigmoid functions, as universal function approximators. You could also train on other features, such
+as the pitch, or formants.
+
+----------Part 3
+
+The code to run part 3.1 and 3.2 is working, but the scripts were taking too long to finish, and
+so I was not able to gather the results.
+
+Part 3.1: Proportion of correct identifications of phoneme sequences in test data
+
+
+Part 3.2: Experiments
+
+M = Number of mixtures per state
+Q = number of states per sequence
+S = number of speakers used in training (amount of training data used)
+D = Number of dimensions used (first D of 14)
+
+
+----------Levenshtein
+
+Reference: Now here is truly a marvel.
+Hypothesis: Now here is truly hey marvel.
+SE: 0.125000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.125000
+
+Reference: The cartoon features a muskrat and a tadpole.
+Hypothesis: Cat tune features a muskrat and a tadpole.
+SE: 0.200000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.200000
+
+Reference: Just let me die in peace.
+Hypothesis: Just let me die in peace.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: The sculptor looked at him, bugeyed and amazed, angry.
+Hypothesis: The sculptor looked at him, bug I'd and amazed, angry.
+SE: 0.090909
+IE: 0.090909
+DE: 0.000000
+
+Total: 0.181818
+
+Reference: A flash illumined the trees as a crooked bolt twigged in several directions.
+Hypothesis: A flash illuminated the trees as crook bolt tweaked several directions.
+SE: 0.200000
+IE: 0.000000
+DE: 0.133333
+
+Total: 0.333333
+
+Reference: This is particularly true in site selection.
+Hypothesis: This is particularly true sight selection.
+SE: 0.111111
+IE: 0.000000
+DE: 0.111111
+
+Total: 0.222222
+
+Reference: We would lose our export markets and deny ourselves the imports we need.
+Hypothesis: We would lose sour expert markets deny ourselves the imports we need.
+SE: 0.133333
+IE: 0.000000
+DE: 0.066667
+
+Total: 0.200000
+
+Reference: Count the number of teaspoons of soysauce that you add.
+Hypothesis: Compton number of teaspoons of so he sauce that you add.
+SE: 0.166667
+IE: 0.166667
+DE: 0.083333
+
+Total: 0.416667
+
+Reference: Finally he asked, do you object to petting?
+Hypothesis: Finally he asked, do you object to petting?
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: Draw every outer line first, then fill in the interior.
+Hypothesis: Draw every other line first, then fill into interior.
+SE: 0.166667
+IE: 0.000000
+DE: 0.083333
+
+Total: 0.250000
+
+Reference: Change involves the displacement of form.
+Hypothesis: Change involves the displacement of fawn.
+SE: 0.125000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.125000
+
+Reference: To his puzzlement, there suddenly was no haze.
+Hypothesis: Two is puzzle mint, there suddenly was no haze.
+SE: 0.300000
+IE: 0.100000
+DE: 0.000000
+
+Total: 0.400000
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Donna's me to carry oily rag like that.
+SE: 0.083333
+IE: 0.000000
+DE: 0.166667
+
+Total: 0.250000
+
+Reference: The full moon shone brightly that night.
+Hypothesis: The the full moon shone brightly that night.
+SE: 0.000000
+IE: 0.111111
+DE: 0.000000
+
+Total: 0.111111
+
+Reference: Tugboats are capable of hauling huge loads.
+Hypothesis: Tugboats are capable falling huge loads.
+SE: 0.111111
+IE: 0.000000
+DE: 0.111111
+
+Total: 0.222222
+
+Reference: Did dad do academic bidding?
+Hypothesis: Did tatoo academic bidding?
+SE: 0.142857
+IE: 0.000000
+DE: 0.142857
+
+Total: 0.285714
+
+Reference: She had your dark suit in greasy wash water all year.
+Hypothesis: See add your dark suit and greasy wash water all year.
+SE: 0.230769
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.230769
+
+Reference: The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Hypothesis: The thick forest was nearly over helmed by Dutch Elm Disease.
+SE: 0.076923
+IE: 0.076923
+DE: 0.076923
+
+Total: 0.230769
+
+Reference: Count the number of teaspoons of soysauce that you add.
+Hypothesis: Cow ten number of teaspoons of soysauce that you add.
+SE: 0.166667
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.166667
+
+Reference: Norwegian sweaters are made of lamb's wool.
+Hypothesis: Norwegian sweaters are made of lamb's wool.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: We think differently.
+Hypothesis: We think differently.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: A toothpaste tube should be squeezed from the bottom.
+Hypothesis: A too pays too should be squeezed from the bottom.
+SE: 0.181818
+IE: 0.090909
+DE: 0.000000
+
+Total: 0.272727
+
+Reference: Ran away on a black night with a lawful wedded man.
+Hypothesis: Ran away on a black night with an awful wedded man.
+SE: 0.153846
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.153846
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Down ask me to carry an oily rag like that.
+SE: 0.083333
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.083333
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Don't ask me to carry an oily rag like that.
+SE: 0.000000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.000000
+
+Reference: Index words and electronic switches may be reserved in the following ways.
+Hypothesis: Index words an electronic switches may be reserved in the following way.
+SE: 0.142857
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.142857
+
+Reference: The avalanche triggered a minor earthquake.
+Hypothesis: The avalanche triggered minor earth way.
+SE: 0.125000
+IE: 0.125000
+DE: 0.125000
+
+Total: 0.375000
+
+Reference: Don't ask me to carry an oily rag like that.
+Hypothesis: Donna's me to carry an oily rag like that.
+SE: 0.083333
+IE: 0.000000
+DE: 0.083333
+
+Total: 0.166667
+
+Reference: The thick elm forest was nearly overwhelmed by Dutch Elm Disease.
+Hypothesis: The thick elm for his was nail he over well bye touch Elm Disease.
+SE: 0.384615
+IE: 0.230769
+DE: 0.000000
+
+Total: 0.615385
+
+Reference: When all else fails, use force.
+Hypothesis: When hall else fails, use forks.
+SE: 0.250000
+IE: 0.000000
+DE: 0.000000
+
+Total: 0.250000
+
+----
+
+Entire SE: 0.134375
+Entire IE: 0.034375
+Entire DE: 0.040625
+
+Entire Total: 0.209375
+
+Part4
+
+----------Part 4
+
+In general, part 4.2 seems to be more accurate, which makes sense considering it starts with the correct
+answer, and since the IBM Watson products are usually sophisticated enough that they have a low error rate
+in each direction of the text->speech->text conversion. Watson seems to be able to recognize its own synthesized
+speech better than our training set, as it is probably trained extensively on the small number of voices
+it offers. You can see this in utterance 2, where Watson can recognize cartoon from its own synthesized speech,
+but misinterprets it from ours. This could also be because the training set we use has speakers with more unusual
+accents, compared with the Michael and Lisa voices with are pretty standard.
+
+Looking at utterance 7, we get more deletion errors in Part 4.1 then 4.2, as short words like 'the' may be
+spoken very quickly by a natural speaker, but are likely enunciated more clearly in the synthesized speech.
+In utterance 13, there are two deletion errors in Part 4.1, making me think that the Watson Speech to Text
+service may just ignore words when it can't make a reasonable guess.
+
+Another interesting case is utterance 25, where both hypotheses mess up 'dont', even though both were correct
+for the same reference text in utterance 24. This shows two problems. One is that the TTS engine struggles with
+contractions when the apostrophe is removed. It also shows that the interpretation by Watson of certain words
+depends heavily on the voice used, as it could recognizeit from a Male voice, but not a Female.
+
+Another issue occurs in utterane 15, where the difference between tug boat and tugboat gets marked as an error,
+although it is ambiguous which one is actually correct, and using a more sophisticated error may help reduce false
+positive error counts like these. 
+
+
+Test Utterance: 1
+Reference: now here is truly a marvel
+Part 4.1 Hypothesis: now here is truly a marvel
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: now here is truly of marvel
+Part 4.2 WER: 16.666667% (Male)
+
+Test Utterance: 2
+Reference: the cartoon features a muskrat and a tadpole
+Part 4.1 Hypothesis: captain features a muskrat and a tadpole
+Part 4.1 WER: 25.000000%
+Part 4.2 Hypothesis: the cartoon features of muskrat and a tadpole
+Part 4.2 WER: 12.500000% (Male)
+
+Test Utterance: 3
+Reference: just let me die in peace
+Part 4.1 Hypothesis: just let me die in peace
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: just let me die in peace
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 4
+Reference: the sculptor looked at him bugeyed and amazed angry
+Part 4.1 Hypothesis: the sculptor looked at him bug eyed and amazed angry
+Part 4.1 WER: 22.222222%
+Part 4.2 Hypothesis: the sculptor looked at mp jeep and amazed angry
+Part 4.2 WER: 22.222222% (Female)
+
+Test Utterance: 5
+Reference: a flash illumined the trees as a crooked bolt twigged in several directions
+Part 4.1 Hypothesis: flash live in the trees as a cricket ball twig in several directions
+Part 4.1 WER: 46.153846%
+Part 4.2 Hypothesis: a flash illumined the trees is a cricket ball twig in several directions
+Part 4.2 WER: 30.769231% (Female)
+
+Test Utterance: 6
+Reference: this is particularly true in site selection
+Part 4.1 Hypothesis: this is particularly true in site selection
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: this is particularly true in site selection
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 7
+Reference: we would lose our export markets and deny ourselves the imports we need
+Part 4.1 Hypothesis: we would lose our export markets and deny ourselves imports we need
+Part 4.1 WER: 7.692308%
+Part 4.2 Hypothesis: we would lose our export markets and deny ourselves the imports we need
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 8
+Reference: count the number of teaspoons of soysauce that you add
+Part 4.1 Hypothesis: continental have teaspoons of soy sauce that you add
+Part 4.1 WER: 60.000000%
+Part 4.2 Hypothesis: count the number of teaspoons of soy sauce that you add
+Part 4.2 WER: 20.000000% (Male)
+
+Test Utterance: 9
+Reference: finally he asked do you object to petting
+Part 4.1 Hypothesis: finally he asked do you object to petting
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: finally he asked do you object to petting
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 10
+Reference: draw every outer line first then fill in the interior
+Part 4.1 Hypothesis: try every other line first then fill in the interior
+Part 4.1 WER: 20.000000%
+Part 4.2 Hypothesis: draw every other line first then fill in the interior
+Part 4.2 WER: 10.000000% (Male)
+
+Test Utterance: 11
+Reference: change involves the displacement of form
+Part 4.1 Hypothesis: change involves the displacement of femme
+Part 4.1 WER: 16.666667%
+Part 4.2 Hypothesis: change involves the displacement of forum
+Part 4.2 WER: 16.666667% (Female)
+
+Test Utterance: 12
+Reference: to his puzzlement there suddenly was no haze
+Part 4.1 Hypothesis: to his puzzlement there suddenly was no hayes
+Part 4.1 WER: 12.500000%
+Part 4.2 Hypothesis: to his puzzlement there suddenly was no hayes
+Part 4.2 WER: 12.500000% (Female)
+
+Test Utterance: 13
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: dont ask me to carry read like that
+Part 4.1 WER: 30.000000%
+Part 4.2 Hypothesis: dante asked me to carry an oily rag like that
+Part 4.2 WER: 20.000000% (Female)
+
+Test Utterance: 14
+Reference: the full moon shone brightly that night
+Part 4.1 Hypothesis: full moon shone brightly that night
+Part 4.1 WER: 28.571429%
+Part 4.2 Hypothesis: the full moon shone brightly that night
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 15
+Reference: tugboats are capable of hauling huge loads
+Part 4.1 Hypothesis: tug boats a capable of hauling huge loads
+Part 4.1 WER: 42.857143%
+Part 4.2 Hypothesis: tug boats are capable of hauling huge loads
+Part 4.2 WER: 28.571429% (Male)
+
+Test Utterance: 16
+Reference: did dad do academic bidding
+Part 4.1 Hypothesis: did dad do academic betting
+Part 4.1 WER: 20.000000%
+Part 4.2 Hypothesis: did dad do academic bidding
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 17
+Reference: she had your dark suit in greasy wash water all year
+Part 4.1 Hypothesis: she had your dark suit increase you wash water all year
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: she had your dark suit in greasy wash water all year
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 18
+Reference: the thick elm forest was nearly overwhelmed by dutch elm disease
+Part 4.1 Hypothesis: the thick el virus was nearly overwhelmed by dutch elm disease
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: the thick around forest was nearly overwhelmed by dutch elm disease
+Part 4.2 WER: 9.090909% (Female)
+
+Test Utterance: 19
+Reference: count the number of teaspoons of soysauce that you add
+Part 4.1 Hypothesis: cop number of teaspoons of soy sauce that you had
+Part 4.1 WER: 50.000000%
+Part 4.2 Hypothesis: count the number of teaspoons of soy sauce that you add
+Part 4.2 WER: 20.000000% (Male)
+
+Test Utterance: 20
+Reference: norwegian sweaters are made of lambs wool
+Part 4.1 Hypothesis: waging sweaters are made of lambs will
+Part 4.1 WER: 28.571429%
+Part 4.2 Hypothesis: norwegian sweaters are made of lambs will
+Part 4.2 WER: 14.285714% (Male)
+
+Test Utterance: 21
+Reference: we think differently
+Part 4.1 Hypothesis: we think differently
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: we think differently
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 22
+Reference: a toothpaste tube should be squeezed from the bottom
+Part 4.1 Hypothesis: a toothpaste tube should be squeezed from the bottom
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: a toothpaste tube should be squeezed from the bottom
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 23
+Reference: ran away on a black night with a lawful wedded man
+Part 4.1 Hypothesis: ran away a black knight with a lawful wedded man
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: ran away on a black knight with a lawful wedded man
+Part 4.2 WER: 9.090909% (Female)
+
+Test Utterance: 24
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 25
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: town asked me to carry an oily rag like that
+Part 4.1 WER: 20.000000%
+Part 4.2 Hypothesis: dante asked me to carry an oily rag like that
+Part 4.2 WER: 20.000000% (Female)
+
+Test Utterance: 26
+Reference: index words and electronic switches may be reserved in the following ways
+Part 4.1 Hypothesis: index words and electronic switches may be reserved in the following ways
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: index words and electronic switches may be reserved in the following ways
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 27
+Reference: the avalanche triggered a minor earthquake
+Part 4.1 Hypothesis: yeah avalanche triggered a minor earthquake
+Part 4.1 WER: 16.666667%
+Part 4.2 Hypothesis: the avalanche triggered a minor earthquake
+Part 4.2 WER: 0.000000% (Female)
+
+Test Utterance: 28
+Reference: dont ask me to carry an oily rag like that
+Part 4.1 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: dont ask me to carry an oily rag like that
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 29
+Reference: the thick elm forest was nearly overwhelmed by dutch elm disease
+Part 4.1 Hypothesis: the thick and forrest was nearly overwhelmed by dutch elm disease
+Part 4.1 WER: 18.181818%
+Part 4.2 Hypothesis: the thick elm forest was nearly overwhelmed by dutch elm disease
+Part 4.2 WER: 0.000000% (Male)
+
+Test Utterance: 30
+Reference: when all else fails use force
+Part 4.1 Hypothesis: when all else fails use force
+Part 4.1 WER: 0.000000%
+Part 4.2 Hypothesis: when all else fails use force
+Part 4.2 WER: 0.000000% (Male)
+
